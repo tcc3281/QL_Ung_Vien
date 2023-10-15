@@ -23,5 +23,10 @@ namespace QL_Ung_Vien.Models
         public DateTime InterviewDate { get => interviewDate; set => interviewDate = value; }
         public string JobID { get => jobID; set => jobID = value; }
         public string CandidateID { get => candidateID; set => candidateID = value; }
+
+        public Interview()
+        {
+            InterviewProcesses= new HashSet<InterviewProcess>();
+        }
     }
 }

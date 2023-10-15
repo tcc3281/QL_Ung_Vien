@@ -9,8 +9,13 @@ namespace QL_Ung_Vien.Models
         [Key]
         private string requirementId;
         private string requirementContent;
-        public virtual ICollection<Job> Job { get; set; }
+        public virtual ICollection<Job> Jobs { get; set; }
         public string RequirementId { get => requirementId;}
         public string RequirementContent { get => requirementContent; set => requirementContent = value; }
+
+        public Requirement()
+        {
+            Jobs= new HashSet<Job>();
+        }
     }
 }

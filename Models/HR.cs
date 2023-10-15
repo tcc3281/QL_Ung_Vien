@@ -18,5 +18,10 @@ namespace QL_Ung_Vien.Models
         public string Email { get => email; set => email = value; }
         public string PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
         public string Image { get => image; set => image = value; }
+
+        public HR()
+        {
+            InterviewProcesses=new HashSet<InterviewProcess>();
+        }
     }
 }

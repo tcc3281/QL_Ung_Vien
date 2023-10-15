@@ -20,5 +20,11 @@ namespace QL_Ung_Vien.Models
         public string Email { get => email; set => email = value; }
         public string CV { get => cV; set => cV = value; }
         public int State { get => state; set => state = value; }
+
+        public Candidate()
+        {
+            Application = new HashSet<Application>();
+            Interviews = new HashSet<Interview>();
+        }
     }
 }

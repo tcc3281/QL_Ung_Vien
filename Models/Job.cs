@@ -29,5 +29,12 @@ namespace QL_Ung_Vien.Models
         public DateTime TimeClose { get => timeClose; set => timeClose = value; }
         public string RequirementID { get => requirementID; set => requirementID = value; }
         public string BenifitID { get => benifitID; set => benifitID = value; }
+
+        public Job()
+        {
+            Applications=new HashSet<Application>();
+            Interviews=new HashSet<Interview>();
+        }
+
     }
 }
