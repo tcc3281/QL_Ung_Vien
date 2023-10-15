@@ -3,17 +3,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QL_Ung_Vien.Models
 {
-    [Table("SinhVien")]
     public class Candidate
     {
         [Key]
-        private string candidateID;
-        private string fullName;
-        private string email;
-        private string cV;
-        private int cStatement;
-        private string cImage;
-        private string phoneNumber;
+        public string candidateID;
+        public string fullName;
+        public string email;
+        public string cV;
+        public int cStatement;
+        public string cImage;
+        public string phoneNumber;
         public virtual ICollection<Application> Application { get; set; }
         public virtual ICollection<Interview> Interviews { get; set; }
         public string CandidateID { get => candidateID; set => candidateID = value; }

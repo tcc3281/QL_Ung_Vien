@@ -3,26 +3,25 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QL_Ung_Vien.Models
 {
-    [Table("QuaTrinhPhongVan")]
     public class InterviewProcess
     {
         [Key]
-        private string IDID;
+        private string iDID;
         private DateTime date;
 
-        [ForeignKey("Interview")]
+        //[ForeignKey("Interview")]
         private string interviewID;
         public virtual Interview?Interview { get; set; }
-        [ForeignKey("HR")]
-        private string HRID;
+        //[ForeignKey("HR")]
+        private string hRID;
         public virtual HR?HR { get; set; }
-        [ForeignKey("InterviewResult")]
-        private string IRID;
+        //[ForeignKey("InterviewResult")]
+        private string iRID;
         public virtual InterviewResult?InterviewResult { get; set; }
-        public string IDID1 { get => IDID; set => IDID = value; }
+        public string IDID { get => iDID; set => iDID = value; }
         public DateTime Date { get => date; set => date = value; }
         public string InterviewID { get => interviewID; set => interviewID = value; }
-        public string HRID1 { get => HRID; set => HRID = value; }
-        public string IRID1 { get => IRID; set => IRID = value; }
+        public string HRID { get => hRID; set => hRID = value; }
+        public string IRID { get => iRID; set => iRID = value; }
     }
 }

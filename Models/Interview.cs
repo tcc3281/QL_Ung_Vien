@@ -3,18 +3,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QL_Ung_Vien.Models
 {
-    [Table("PhongVan")]
     public class Interview
     {
         [Key]
-        private string interviewID;
-        private DateTime interviewDate;
-        [ForeignKey("Job")]
-        private string jobID;
+        public string interviewID;
+        public DateTime interviewDate;
+        //[ForeignKey("Job")]
+        public string jobID;
         public virtual Job? Job { get; set; }
 
-        [ForeignKey("Candidate")]
-        private string candidateID;
+        //[ForeignKey("Candidate")]
+        public string candidateID;
         public virtual Candidate? Candidate { get; set; }
         public virtual ICollection<InterviewProcess> InterviewProcesses { get; set; }
 
