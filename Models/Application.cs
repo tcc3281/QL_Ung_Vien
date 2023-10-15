@@ -16,12 +16,12 @@ namespace QL_Ung_Vien.Models
         public virtual Job? Job { get; set; }
         private DateTime applyDate;
         private string level;
-        private int state;
+        private int aStatement;
 
         public string CandicateId { get => candidateId; set => candidateId = value; }
         public string JobId { get => jobId; set => jobId = value; }
         public DateTime ApplyDate { get => applyDate; set => applyDate = value; }
         public string Level { get => level; set => level = value; }
-        public int State { get => state; set => state = value; }
+        public int State { get => aStatement; set => aStatement = value; }
     }
 }

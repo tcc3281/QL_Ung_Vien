@@ -1,9 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using QL_Ung_Vien.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+//dang ki db context
+builder.Services.AddDbContext<QL_Ung_VienContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("QL_Ung_VienContext")));
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

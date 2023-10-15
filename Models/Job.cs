@@ -8,8 +8,8 @@ namespace QL_Ung_Vien.Models
     {
         [Key]
         private string jobID;
-        private string name;
-        private string description;
+        private string jobName;
+        private string JD;
         private DateTime timeOpen;
         private DateTime timeClose;
 
@@ -23,8 +23,8 @@ namespace QL_Ung_Vien.Models
         public virtual ICollection<Application> Applications { get; set; }
         public virtual ICollection<Interview> Interviews { get; set; }
         public string JobID { get => jobID; set => jobID = value; }
-        public string Name { get => name; set => name = value; }
-        public string Description { get => description; set => description = value; }
+        public string Name { get => jobName; set => jobName = value; }
+        public string Description { get => JD; set => JD = value; }
         public DateTime TimeOpen { get => timeOpen; set => timeOpen = value; }
         public DateTime TimeClose { get => timeClose; set => timeClose = value; }
         public string RequirementID { get => requirementID; set => requirementID = value; }
