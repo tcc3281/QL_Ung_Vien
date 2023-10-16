@@ -7,7 +7,7 @@ namespace QL_Ung_Vien.Models
     {
         [Key]
         public string interviewID;
-        public DateTime interviewDate;
+        public DateTime interviewDate;//ngày phỏng vấn
         //[ForeignKey("Job")]
         public string jobID;
         public virtual Job? Job { get; set; }

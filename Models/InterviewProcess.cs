@@ -7,7 +7,7 @@ namespace QL_Ung_Vien.Models
     {
         [Key]
         private string iDID;
-        private DateTime date;
+        private DateTime date;//ngày diễn ra
 
         //[ForeignKey("Interview")]
         private string interviewID;

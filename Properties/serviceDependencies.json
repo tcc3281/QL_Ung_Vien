@@ -4,6 +4,10 @@
       "type": "mssql",
       "connectionId": "ConnectionStrings:QL_Ung_VienContext",
       "dynamicId": null
+    },
+    "secrets1": {
+      "type": "secrets",
+      "dynamicId": null
     }
   }
 }

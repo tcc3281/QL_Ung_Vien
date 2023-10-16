@@ -3,11 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QL_Ung_Vien.Models
 {
-    public class Benefit
+    public class Benefit//quyền lợi
     {
         [Key]
+        [StringLength(20)]
+        [Required]
         private string benefitID;
-        private string benefitContent;
+        private string benefitContent;//nội dung quyền lợi
         public virtual ICollection<Job> Jobs { get; set; }
         public string BenefitID { get => benefitID; set => benefitID = value; }
         public string BenefitContent { get => benefitContent; set => benefitContent = value; }
