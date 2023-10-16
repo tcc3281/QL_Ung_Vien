@@ -6,10 +6,11 @@ namespace QL_Ung_Vien.Models
     public class InterviewResult
     {
         [Key]
-        private string iRID;
-        private string comment;
-
-        public string IRID { get => iRID; set => iRID = value; }
-        public string Comment { get => comment; set => comment = value; }
+        [Column(TypeName = "varchar(20)")]
+        public string iRID {  get; set; }
+        [Column(TypeName = "nvarchar(200)")]
+        public string comment {  get; set; }
+        [Column(TypeName = "int")]
+        public int iRStatement { get; set; }//trang thai ket qua do hay chua
     }
 }

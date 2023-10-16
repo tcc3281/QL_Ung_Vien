@@ -5,18 +5,16 @@ namespace QL_Ung_Vien.Models
 {
     public class Benefit//quyền lợi
     {
+        
         [Key]
-        [StringLength(20)]
-        [Required]
-        private string benefitID;
-        private string benefitContent;//nội dung quyền lợi
-        public virtual ICollection<Job> Jobs { get; set; }
-        public string BenefitID { get => benefitID; set => benefitID = value; }
-        public string BenefitContent { get => benefitContent; set => benefitContent = value; }
-
+        [Column(TypeName ="varchar(10)")]
+        public string benefitID {  get; set; }
+        [Column(TypeName ="nvarchar(500)")]
+        public string benefitContent { get; set; }
+        public virtual ICollection<Job> jobs { get; set; }
         public Benefit() 
         {
-            Jobs=new HashSet<Job>();
+            jobs = new HashSet<Job>();
         }
 
     }

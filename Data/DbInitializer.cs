@@ -10,7 +10,7 @@ namespace QL_Ung_Vien.Data
             {
                 //EnsureCreated(); Kiểm tra xem database có được tạo mới hay không nếu có trả về true và tạo database
                 //false nếu đã có
-                //context.Database.EnsureDeleted();
+                context.Database.EnsureDeleted();//xoa database khi da ton tai
                 context.Database.EnsureCreated();
                 context.SaveChanges();
             }

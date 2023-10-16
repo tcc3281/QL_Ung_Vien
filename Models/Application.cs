@@ -5,21 +5,18 @@ namespace QL_Ung_Vien.Models
 {
     public class Application//ứng tuyển
     {
-        //[ForeignKey("Candidate")]
-        private string candidateID;
+        [Column(TypeName ="varchar(20)")]
+        public string candidateID { get; set; }
         public virtual Candidate? Candidate { get; set; }
-        //[ForeignKey("Job")]
-        private string jobID;
+        [Column(TypeName = "varchar(20)")]
+        public string jobID { get; set; }
         public virtual Job? Job { get; set; } 
-        public string CandidateID { get => candidateID; set => candidateID = value; }
-        public string JobID { get => jobID; set => jobID = value; }
-        public DateTime ApplyDate { get => applyDate; set => applyDate = value; }
-        public string Level { get => level; set => level = value; }
-        public int AStatement { get => aStatement; set => aStatement = value; }
-
-        private DateTime applyDate;//ngày ứng tuyển
-        private string level;//trình độ
-        private int aStatement;//trạng thái - chưa xét duyệt - đã xét duyệt - từ chối
+        [Column(TypeName ="datetime2")]
+        public DateTime applyDate { get; set; }//ngày ứng tuyển
+        [Column(TypeName ="nvarchar(100)")]
+        public string level { get; set; }//trình độ
+        [Column(TypeName ="int")]
+        public int aStatement { get; set; }//trạng thái - chưa xét duyệt - đã xét duyệt - từ chối
 
     }
 }

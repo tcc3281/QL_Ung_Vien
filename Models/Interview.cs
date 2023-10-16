@@ -6,23 +6,17 @@ namespace QL_Ung_Vien.Models
     public class Interview
     {
         [Key]
-        public string interviewID;
-        public DateTime interviewDate;//ngày phỏng vấn
-        //[ForeignKey("Job")]
-        public string jobID;
+        [Column(TypeName = "varchar(20)")]
+        public string interviewID { get; set; }
+        [Column(TypeName = "varchar(20)")]
+        public string jobID { get; set; }
         public virtual Job? Job { get; set; }
-
-        //[ForeignKey("Candidate")]
-        public string candidateID;
+        [Column(TypeName = "varchar(20)")]
+        public string candidateID { get; set; }
         public virtual Candidate? Candidate { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime interviewDate { get; set; }//ngày phỏng vấn
         public virtual ICollection<InterviewProcess> InterviewProcesses { get; set; }
-
-        
-        public string InterviewID { get => interviewID; set => interviewID = value; }
-        public DateTime InterviewDate { get => interviewDate; set => interviewDate = value; }
-        public string JobID { get => jobID; set => jobID = value; }
-        public string CandidateID { get => candidateID; set => candidateID = value; }
-
         public Interview()
         {
             InterviewProcesses= new HashSet<InterviewProcess>();

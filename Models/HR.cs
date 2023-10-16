@@ -6,18 +6,18 @@ namespace QL_Ung_Vien.Models
     public class HR
     {
         [Key]
-        private string hRID;
-        private string fullName;
-        private string email;
-        private string phoneNumber;
-        private string image;
+        [Column(TypeName = "varchar(20)")]
+        public string hRID{ get; set; }
+        [Column(TypeName = "nvarchar(100)")]
+        public string fullName { get; set; }
+        [Column(TypeName = "varchar(100)")]
+        public string email { get; set; }
+        [Column(TypeName = "varchar(20)")]
+        public string phoneNumber { get; set; }
+        [Column(TypeName = "varchar(200)")]
+        public string image { get; set; }
         public virtual ICollection<InterviewProcess> InterviewProcesses { get; set; }
-        public string HRID { get => hRID; set => hRID = value; }
-        public string FullName { get => fullName; set => fullName = value; }
-        public string Email { get => email; set => email = value; }
-        public string PhoneNumber { get => phoneNumber; set => phoneNumber = value; }
-        public string Image { get => image; set => image = value; }
-
+        
         public HR()
         {
             InterviewProcesses=new HashSet<InterviewProcess>();

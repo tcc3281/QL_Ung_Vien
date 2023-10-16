@@ -6,22 +6,19 @@ namespace QL_Ung_Vien.Models
     public class InterviewProcess
     {
         [Key]
-        private string iDID;
-        private DateTime date;//ngày diễn ra
+        [Column(TypeName = "varchar(20)")]
+        public string iDID { get; set; }
+        [Column(TypeName = "datetime2")]
+        public DateTime date { get; set; }//ngày diễn ra
 
-        //[ForeignKey("Interview")]
-        private string interviewID;
+        [Column(TypeName = "varchar(20)")]
+        public string interviewID { get; set; }
         public virtual Interview?Interview { get; set; }
-        //[ForeignKey("HR")]
-        private string hRID;
+        [Column(TypeName = "varchar(20)")]
+        public string hRID { get; set; }
         public virtual HR?HR { get; set; }
-        //[ForeignKey("InterviewResult")]
-        private string iRID;
+        [Column(TypeName = "varchar(20)")]
+        public string iRID { get; set; }
         public virtual InterviewResult?InterviewResult { get; set; }
-        public string IDID { get => iDID; set => iDID = value; }
-        public DateTime Date { get => date; set => date = value; }
-        public string InterviewID { get => interviewID; set => interviewID = value; }
-        public string HRID { get => hRID; set => hRID = value; }
-        public string IRID { get => iRID; set => iRID = value; }
     }
 }

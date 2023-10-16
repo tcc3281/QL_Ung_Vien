@@ -6,12 +6,11 @@ namespace QL_Ung_Vien.Models
     public class Requirement
     {
         [Key]
-        private string requirementID;
-        private string requirementContent;
+        [Column(TypeName = "varchar(20)")]
+        public string requirementID { get; set; }
+        [Column(TypeName = "nvarchar(500)")]
+        public string requirementContent { get; set; }
         public virtual ICollection<Job> Jobs { get; set; }
-        public string RequirementID { get => requirementID; set => requirementID = value; }
-        public string RequirementContent { get => requirementContent; set => requirementContent = value; }
-
         public Requirement()
         {
             Jobs= new HashSet<Job>();
