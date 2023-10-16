@@ -18,6 +18,8 @@ namespace QL_Ung_Vien.Models
 
         private string jobName;
         private string jD;
+        private DateTime timeOpen;//thời giản mở ứng tuyển
+        private DateTime timeClose;//thời gian đóng ứng tuyển
 
         public virtual ICollection<Application> Applications { get; set; }
         public virtual ICollection<Interview> Interviews { get; set; }
@@ -26,6 +28,8 @@ namespace QL_Ung_Vien.Models
         public string JD { get => jD; set => jD = value; }
         public string BenifitID { get => benifitID; set => benifitID = value; }
         public string RequirementID { get => requirementID; set => requirementID = value; }
+        public DateTime TimeOpen { get => timeOpen; set => timeOpen = value; }
+        public DateTime TimeClose { get => timeClose; set => timeClose = value; }
 
         public Job()
         {
