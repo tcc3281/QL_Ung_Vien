@@ -7,10 +7,10 @@ namespace QL_Ung_Vien.Models
     {
         [Key]
         [Column(TypeName = "varchar(20)")]
-        public string iRID {  get; set; }
+        public string? iRID {  get; set; }
         [Column(TypeName = "nvarchar(200)")]
-        public string comment {  get; set; }
+        public string? comment {  get; set; }
         [Column(TypeName = "int")]
-        public int iRStatement { get; set; }//trang thai ket qua do hay chua
+        public int? iRStatement { get; set; }//trang thai ket qua do hay chua
     }
 }

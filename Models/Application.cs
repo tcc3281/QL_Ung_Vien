@@ -12,11 +12,11 @@ namespace QL_Ung_Vien.Models
         public string jobID { get; set; }
         public virtual Job? Job { get; set; } 
         [Column(TypeName ="datetime2")]
-        public DateTime applyDate { get; set; }//ngày ứng tuyển
+        public DateTime? applyDate { get; set; }//ngày ứng tuyển
         [Column(TypeName ="nvarchar(100)")]
-        public string level { get; set; }//trình độ
+        public string? level { get; set; }//trình độ
         [Column(TypeName ="int")]
-        public int aStatement { get; set; }//trạng thái - chưa xét duyệt - đã xét duyệt - từ chối
+        public int? aStatement { get; set; }//trạng thái - chưa xét duyệt - đã xét duyệt - từ chối
 
     }
 }

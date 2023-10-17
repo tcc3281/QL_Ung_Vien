@@ -10,7 +10,8 @@ namespace QL_Ung_Vien.Models
         [Column(TypeName ="varchar(10)")]
         public string benefitID {  get; set; }
         [Column(TypeName ="nvarchar(500)")]
-        public string benefitContent { get; set; }
+        [StringLength(500)]
+        public string? benefitContent { get; set; }
         public virtual ICollection<Job> jobs { get; set; }
         public Benefit() 
         {

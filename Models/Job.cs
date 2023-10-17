@@ -9,20 +9,20 @@ namespace QL_Ung_Vien.Models
         [Column(TypeName = "varchar(20)")]
         public string jobID { get; set; }
         [Column(TypeName = "varchar(20)")]
-        public string benifitID { get; set; }
-        public virtual Benefit Benefit { get; set; }
+        public string? benifitID { get; set; }
+        public virtual Benefit? Benefit { get; set; }
 
         [Column(TypeName = "varchar(20)")]
-        public string requirementID { get; set; }
+        public string? requirementID { get; set; }
         public virtual Requirement Requirement { get; set; }
         [Column(TypeName = "nvarchar(100)")]
-        public string jobName { get; set; }
+        public string? jobName { get; set; }
         [Column(TypeName = "nvarchar(500)")]
-        public string jD { get; set; }
+        public string? jD { get; set; }
         [Column(TypeName = "datetime2")]
-        public DateTime timeOpen { get; set; }//thời giản mở ứng tuyển
+        public DateTime? timeOpen { get; set; }//thời giản mở ứng tuyển
         [Column(TypeName = "datetime2")]
-        public DateTime timeClose { get; set; }//thời gian đóng ứng tuyển
+        public DateTime? timeClose { get; set; }//thời gian đóng ứng tuyển
 
         public virtual ICollection<Application> Applications { get; set; }
         public virtual ICollection<Interview> Interviews { get; set; }

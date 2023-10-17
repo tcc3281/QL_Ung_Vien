@@ -9,13 +9,13 @@ namespace QL_Ung_Vien.Models
         [Column(TypeName = "varchar(20)")]
         public string hRID{ get; set; }
         [Column(TypeName = "nvarchar(100)")]
-        public string fullName { get; set; }
+        public string? fullName { get; set; }
         [Column(TypeName = "varchar(100)")]
-        public string email { get; set; }
+        public string? email { get; set; }
         [Column(TypeName = "varchar(20)")]
-        public string phoneNumber { get; set; }
+        public string? phoneNumber { get; set; }
         [Column(TypeName = "varchar(200)")]
-        public string image { get; set; }
+        public string? image { get; set; }
         public virtual ICollection<InterviewProcess> InterviewProcesses { get; set; }
         
         public HR()

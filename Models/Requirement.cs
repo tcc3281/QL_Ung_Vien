@@ -9,7 +9,8 @@ namespace QL_Ung_Vien.Models
         [Column(TypeName = "varchar(20)")]
         public string requirementID { get; set; }
         [Column(TypeName = "nvarchar(500)")]
-        public string requirementContent { get; set; }
+        [StringLength(500)]
+        public string? requirementContent { get; set; }
         public virtual ICollection<Job> Jobs { get; set; }
         public Requirement()
         {
