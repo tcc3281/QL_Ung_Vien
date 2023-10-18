@@ -23,6 +23,9 @@ namespace QL_Ung_Vien.Models
         public DateTime? timeOpen { get; set; }//thời giản mở ứng tuyển
         [Column(TypeName = "datetime2")]
         public DateTime? timeClose { get; set; }//thời gian đóng ứng tuyển
+        [Column(TypeName = "varchar(20)")]
+        public string? ImageID { get; set; }
+        public Image? Image { get; set; }
 
         public virtual ICollection<Application> Applications { get; set; }
         public virtual ICollection<Interview> Interviews { get; set; }

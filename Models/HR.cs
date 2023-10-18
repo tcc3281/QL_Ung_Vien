@@ -14,8 +14,9 @@ namespace QL_Ung_Vien.Models
         public string? email { get; set; }
         [Column(TypeName = "varchar(20)")]
         public string? phoneNumber { get; set; }
-        [Column(TypeName = "varchar(200)")]
-        public string? image { get; set; }
+        [Column(TypeName = "varchar(20)")]
+        public string? ImageID { get; set; }
+        public Image? Image { get; set; }
         public virtual ICollection<InterviewProcess> InterviewProcesses { get; set; }
         
         public HR()

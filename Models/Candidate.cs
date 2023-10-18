@@ -15,14 +15,15 @@ namespace QL_Ung_Vien.Models
 
         [Column(TypeName = "varchar(100)")]
         public string? email { get; set; }
-
-        [Column(TypeName = "varchar(200)")]
-        public string? cV { get; set; }//CV lưu trữ bằng url
         [Column(TypeName ="int")]
         public int? cStatement { get; set; }//trang thai  được nhận chưa đang xet tuyển hay gì
 
-        [Column(TypeName = "varchar(200)")]
-        public string? cImage { get; set; }//url lưu ảnh
+        [Column(TypeName = "varchar(20)")]
+        public string? ImageID { get; set; }
+        public Image? Image { get; set; }
+        [Column(TypeName = "varchar(20)")]
+        public string? CVID { get; set; }
+        public CV? CV { get; set; }
 
         [Column(TypeName = "varchar(20)")]
         [StringLength(20, MinimumLength = 5, ErrorMessage = "Độ dài không phù hợp")]

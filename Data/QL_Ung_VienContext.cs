@@ -16,6 +16,8 @@ namespace QL_Ung_Vien.Data
         public virtual DbSet<Interview> Interviews { get; set; }
         public virtual DbSet<InterviewResult> InterviewsResults { get; set; }
         public virtual DbSet<InterviewProcess> InterviewsProcesses { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
+        public virtual DbSet<CV> CVs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,6 +35,8 @@ namespace QL_Ung_Vien.Data
             modelBuilder.Entity<Interview>().ToTable(nameof(Interview));
             modelBuilder.Entity<InterviewResult>().ToTable(nameof(InterviewResult));
             modelBuilder.Entity<InterviewProcess>().ToTable(nameof(InterviewProcess));
+            modelBuilder.Entity<Image>().ToTable(nameof(Image));
+            modelBuilder.Entity<CV>().ToTable(nameof(CV));
         }
 
     }
