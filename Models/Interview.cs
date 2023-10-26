@@ -7,14 +7,17 @@ namespace QL_Ung_Vien.Models
     {
         [Key]
         [Column(TypeName = "varchar(20)")]
+        [Display(Name = "Mã phỏng vấn")]
         public string interviewID { get; set; }
+
         [Column(TypeName = "varchar(20)")]
         public string? jobID { get; set; }
         public virtual Job? Job { get; set; }
         [Column(TypeName = "varchar(20)")]
         public string? candidateID { get; set; }
         public virtual Candidate? Candidate { get; set; }
-        [Column(TypeName = "datetime2")]
+        [Column(TypeName = "datetime")]
+        [Display(Name = "Thời gian phỏng vấn")]
         public DateTime? interviewDate { get; set; }//ngày phỏng vấn
         public virtual ICollection<InterviewProcess> InterviewProcesses { get; set; }
         public Interview()

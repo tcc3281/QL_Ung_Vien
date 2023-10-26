@@ -7,9 +7,11 @@ namespace QL_Ung_Vien.Models
     {
         [Key]
         [Column(TypeName = "varchar(20)")]
+        [Display(Name ="Mã quyền lợi")]
         public string requirementID { get; set; }
         [Column(TypeName = "nvarchar(500)")]
         [StringLength(500)]
+        [Display(Name = "Nội dung quyền lợi")]
         public string? requirementContent { get; set; }
         public virtual ICollection<Job> Jobs { get; set; }
         public Requirement()

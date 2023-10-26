@@ -8,9 +8,11 @@ namespace QL_Ung_Vien.Models
         
         [Key]
         [Column(TypeName ="varchar(10)")]
+        [Display(Name = "Mã quyền lợi")]
         public string benefitID {  get; set; }
         [Column(TypeName ="nvarchar(500)")]
         [StringLength(500)]
+        [Display(Name = "Nội dung")]
         public string? benefitContent { get; set; }
         public virtual ICollection<Job> jobs { get; set; }
         public Benefit() 

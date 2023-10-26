@@ -4,7 +4,13 @@
       "serviceConnectorResourceId": "",
       "secretStore": "LocalSecretsFile",
       "type": "mssql.onprem",
-      "connectionId": "ConnectionStrings:QL_Ung_VienContext",
+      "connectionId": "ConnectionStrings:QL_Ung_VienContext"
+    },
+    "mssql2": {
+      "serviceConnectorResourceId": "",
+      "secretStore": "LocalSecretsFile",
+      "type": "mssql.onprem",
+      "connectionId": "ConnectionStrings:ApplicationDbContextConnection",
       "dynamicId": null
     }
   }

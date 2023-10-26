@@ -7,12 +7,21 @@ namespace QL_Ung_Vien.Models
     {
         [Key]
         [Column(TypeName = "varchar(20)")]
+        [Display(Name = "Mã HR")]
         public string hRID{ get; set; }
         [Column(TypeName = "nvarchar(100)")]
-        public string? fullName { get; set; }
+        [StringLength(100)]
+        [Display(Name = "Tên")]
+        public string? firstName { get; set; }
+        [Column(TypeName = "nvarchar(100)")]
+        [StringLength(100)]
+        [Display(Name = "Họ")]
+        public string? lastName { get; set; }
         [Column(TypeName = "varchar(100)")]
+        [Display(Name = "Email")]
         public string? email { get; set; }
         [Column(TypeName = "varchar(20)")]
+        [Display(Name = "Phone")]
         public string? phoneNumber { get; set; }
         [Column(TypeName = "varchar(20)")]
         public string? ImageID { get; set; }

@@ -7,8 +7,8 @@ namespace QL_Ung_Vien.Models
     {
         [Key]
         [Column(TypeName = "varchar(20)")]
-        public string iDID { get; set; }
-        [Column(TypeName = "datetime2")]
+        public string ipID { get; set; }
+        [Column(TypeName = "datetime")]
         public DateTime? date { get; set; }//ngày diễn ra
 
         [Column(TypeName = "varchar(20)")]
