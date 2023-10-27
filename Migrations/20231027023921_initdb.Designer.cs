@@ -12,8 +12,8 @@ using QL_Ung_Vien.Areas.Identity.Data;
 namespace QL_Ung_Vien.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231026075411_initDataCandidate1")]
-    partial class initDataCandidate1
+    [Migration("20231027023921_initdb")]
+    partial class initdb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -238,11 +238,11 @@ namespace QL_Ung_Vien.Migrations
 
             modelBuilder.Entity("QL_Ung_Vien.Models.Application", b =>
                 {
-                    b.Property<string>("jobID")
-                        .HasColumnType("varchar(20)");
+                    b.Property<int>("jobID")
+                        .HasColumnType("int");
 
-                    b.Property<string>("candidateID")
-                        .HasColumnType("varchar(20)");
+                    b.Property<int>("candidateID")
+                        .HasColumnType("int");
 
                     b.Property<int?>("aStatement")
                         .HasColumnType("int");
@@ -262,8 +262,11 @@ namespace QL_Ung_Vien.Migrations
 
             modelBuilder.Entity("QL_Ung_Vien.Models.Benefit", b =>
                 {
-                    b.Property<string>("benefitID")
-                        .HasColumnType("varchar(10)");
+                    b.Property<int>("benefitID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("benefitID"), 1L, 1);
 
                     b.Property<string>("benefitContent")
                         .HasMaxLength(500)
@@ -276,14 +279,17 @@ namespace QL_Ung_Vien.Migrations
 
             modelBuilder.Entity("QL_Ung_Vien.Models.Candidate", b =>
                 {
-                    b.Property<string>("candidateID")
-                        .HasColumnType("varchar(20)");
+                    b.Property<int>("candidateID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("CVID")
-                        .HasColumnType("varchar(20)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("candidateID"), 1L, 1);
 
-                    b.Property<string>("ImageID")
-                        .HasColumnType("varchar(20)");
+                    b.Property<int?>("CVID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ImageID")
+                        .HasColumnType("int");
 
                     b.Property<int?>("cStatement")
                         .HasColumnType("int");
@@ -314,8 +320,11 @@ namespace QL_Ung_Vien.Migrations
 
             modelBuilder.Entity("QL_Ung_Vien.Models.CV", b =>
                 {
-                    b.Property<string>("cVID")
-                        .HasColumnType("varchar(20)");
+                    b.Property<int>("cVID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("cVID"), 1L, 1);
 
                     b.Property<string>("path")
                         .HasColumnType("varchar(500)");
@@ -327,11 +336,14 @@ namespace QL_Ung_Vien.Migrations
 
             modelBuilder.Entity("QL_Ung_Vien.Models.HR", b =>
                 {
-                    b.Property<string>("hRID")
-                        .HasColumnType("varchar(20)");
+                    b.Property<int>("hRID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("ImageID")
-                        .HasColumnType("varchar(20)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("hRID"), 1L, 1);
+
+                    b.Property<int?>("ImageID")
+                        .HasColumnType("int");
 
                     b.Property<string>("email")
                         .HasColumnType("varchar(100)");
@@ -356,8 +368,11 @@ namespace QL_Ung_Vien.Migrations
 
             modelBuilder.Entity("QL_Ung_Vien.Models.Image", b =>
                 {
-                    b.Property<string>("imageID")
-                        .HasColumnType("varchar(20)");
+                    b.Property<int>("imageID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("imageID"), 1L, 1);
 
                     b.Property<string>("path")
                         .HasColumnType("varchar(500)");
@@ -369,17 +384,20 @@ namespace QL_Ung_Vien.Migrations
 
             modelBuilder.Entity("QL_Ung_Vien.Models.Interview", b =>
                 {
-                    b.Property<string>("interviewID")
-                        .HasColumnType("varchar(20)");
+                    b.Property<int>("interviewID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("candidateID")
-                        .HasColumnType("varchar(20)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("interviewID"), 1L, 1);
+
+                    b.Property<int?>("candidateID")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("interviewDate")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("jobID")
-                        .HasColumnType("varchar(20)");
+                    b.Property<int?>("jobID")
+                        .HasColumnType("int");
 
                     b.HasKey("interviewID");
 
@@ -392,25 +410,28 @@ namespace QL_Ung_Vien.Migrations
 
             modelBuilder.Entity("QL_Ung_Vien.Models.InterviewProcess", b =>
                 {
-                    b.Property<string>("ipID")
-                        .HasColumnType("varchar(20)");
+                    b.Property<int>("iPID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("InterviewResultiRID")
-                        .HasColumnType("varchar(20)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("iPID"), 1L, 1);
+
+                    b.Property<int?>("InterviewResultiRID")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("date")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("hRID")
-                        .HasColumnType("varchar(20)");
+                    b.Property<int?>("hRID")
+                        .HasColumnType("int");
 
-                    b.Property<string>("iRID")
-                        .HasColumnType("varchar(20)");
+                    b.Property<int?>("iRID")
+                        .HasColumnType("int");
 
-                    b.Property<string>("interviewID")
-                        .HasColumnType("varchar(20)");
+                    b.Property<int?>("interviewID")
+                        .HasColumnType("int");
 
-                    b.HasKey("ipID");
+                    b.HasKey("iPID");
 
                     b.HasIndex("InterviewResultiRID");
 
@@ -423,8 +444,11 @@ namespace QL_Ung_Vien.Migrations
 
             modelBuilder.Entity("QL_Ung_Vien.Models.InterviewResult", b =>
                 {
-                    b.Property<string>("iRID")
-                        .HasColumnType("varchar(20)");
+                    b.Property<int?>("iRID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("iRID"), 1L, 1);
 
                     b.Property<string>("comment")
                         .HasColumnType("nvarchar(200)");
@@ -439,17 +463,20 @@ namespace QL_Ung_Vien.Migrations
 
             modelBuilder.Entity("QL_Ung_Vien.Models.Job", b =>
                 {
-                    b.Property<string>("jobID")
-                        .HasColumnType("varchar(20)");
+                    b.Property<int>("jobID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<string>("ImageID")
-                        .HasColumnType("varchar(20)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("jobID"), 1L, 1);
 
-                    b.Property<string>("benefitID")
-                        .HasColumnType("varchar(10)");
+                    b.Property<int?>("ImageID")
+                        .HasColumnType("int");
 
-                    b.Property<string>("benifitID")
-                        .HasColumnType("varchar(20)");
+                    b.Property<int?>("benefitID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("benifitID")
+                        .HasColumnType("int");
 
                     b.Property<string>("jD")
                         .HasColumnType("nvarchar(500)");
@@ -457,14 +484,14 @@ namespace QL_Ung_Vien.Migrations
                     b.Property<string>("jobName")
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("requirementID")
-                        .HasColumnType("varchar(20)");
+                    b.Property<int?>("requirementID")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("timeClose")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime?>("timeOpen")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.HasKey("jobID");
 
@@ -479,8 +506,11 @@ namespace QL_Ung_Vien.Migrations
 
             modelBuilder.Entity("QL_Ung_Vien.Models.Requirement", b =>
                 {
-                    b.Property<string>("requirementID")
-                        .HasColumnType("varchar(20)");
+                    b.Property<int>("requirementID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("requirementID"), 1L, 1);
 
                     b.Property<string>("requirementContent")
                         .HasMaxLength(500)

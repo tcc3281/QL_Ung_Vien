@@ -6,9 +6,9 @@ namespace QL_Ung_Vien.Models
     public class Image
     {
         [Key]
-        [Column(TypeName = "varchar(20)")]
+        [Column(TypeName = "int")]
         [Display(Name = "Mã ảnh")]
-        public string imageID {  get; set; }
+        public int imageID {  get; set; }
         [Column(TypeName = "varchar(500)")]
         [Display(Name = "Link")]
         public string? path {  get; set; }

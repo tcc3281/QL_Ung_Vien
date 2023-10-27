@@ -6,15 +6,15 @@ namespace QL_Ung_Vien.Models
     public class Job
     {
         [Key]
-        [Column(TypeName = "varchar(20)")]
+        [Column(TypeName = "int")]
         [Display(Name = "Mã công việc")]
-        public string jobID { get; set; }
-        [Column(TypeName = "varchar(20)")]
-        public string? benifitID { get; set; }
+        public int jobID { get; set; }
+        [Column(TypeName = "int")]
+        public int? benifitID { get; set; }
         public virtual Benefit? Benefit { get; set; }
 
-        [Column(TypeName = "varchar(20)")]
-        public string? requirementID { get; set; }
+        [Column(TypeName = "int")]
+        public int? requirementID { get; set; }
         public virtual Requirement Requirement { get; set; }
         [Column(TypeName = "nvarchar(100)")]
         [Display(Name = "Tên công việc")]
@@ -28,8 +28,8 @@ namespace QL_Ung_Vien.Models
         [Column(TypeName = "datetime")]
         [Display(Name = "Hạn ứng tuyển")]
         public DateTime? timeClose { get; set; }//thời gian đóng ứng tuyển
-        [Column(TypeName = "varchar(20)")]
-        public string? ImageID { get; set; }
+        [Column(TypeName = "int")]
+        public int? ImageID { get; set; }
         public Image? Image { get; set; }
 
         public virtual ICollection<Application> Applications { get; set; }

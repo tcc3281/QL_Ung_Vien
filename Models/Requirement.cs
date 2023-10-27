@@ -6,9 +6,9 @@ namespace QL_Ung_Vien.Models
     public class Requirement
     {
         [Key]
-        [Column(TypeName = "varchar(20)")]
+        [Column(TypeName = "int")]
         [Display(Name ="Mã quyền lợi")]
-        public string requirementID { get; set; }
+        public int requirementID { get; set; }
         [Column(TypeName = "nvarchar(500)")]
         [StringLength(500)]
         [Display(Name = "Nội dung quyền lợi")]

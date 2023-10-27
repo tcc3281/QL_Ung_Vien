@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using QL_Ung_Vien.Areas.Identity.Data;
 using QL_Ung_Vien.Models;
 using System.Diagnostics;
 
@@ -7,18 +8,12 @@ namespace QL_Ung_Vien.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
+        public async Task<IActionResult> Index()
         {
             return View();
         }

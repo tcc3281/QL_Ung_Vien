@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using QL_Ung_Vien.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
@@ -9,9 +11,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)//RequireConfirmedAccount = false => t?t xác th?c email
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
-
+builder.Services.AddControllers(config =>
+{
+    var policy = new AuthorizationPolicyBuilder()
+                     .RequireAuthenticatedUser()
+                     .Build();
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
