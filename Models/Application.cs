@@ -5,11 +5,11 @@ namespace QL_Ung_Vien.Models
 {
     public class Application//ứng tuyển
     {
-        [Column(TypeName ="varchar(20)")]
-        public string candidateID { get; set; }
+        [Column(TypeName = "int")]
+        public int candidateID { get; set; }
         public virtual Candidate? Candidate { get; set; }
-        [Column(TypeName = "varchar(20)")]
-        public string jobID { get; set; }
+        [Column(TypeName = "int")]
+        public int jobID { get; set; }
         public virtual Job? Job { get; set; } 
         [Column(TypeName ="datetime2")]
         public DateTime? applyDate { get; set; }//ngày ứng tuyển

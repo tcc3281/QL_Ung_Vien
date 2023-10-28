@@ -6,9 +6,9 @@ namespace QL_Ung_Vien.Models
     public class HR
     {
         [Key]
-        [Column(TypeName = "varchar(20)")]
+        [Column(TypeName = "int")]
         [Display(Name = "Mã HR")]
-        public string hRID{ get; set; }
+        public int hRID { get; set; }
         [Column(TypeName = "nvarchar(100)")]
         [StringLength(100)]
         [Display(Name = "Tên")]
@@ -23,8 +23,8 @@ namespace QL_Ung_Vien.Models
         [Column(TypeName = "varchar(20)")]
         [Display(Name = "Phone")]
         public string? phoneNumber { get; set; }
-        [Column(TypeName = "varchar(20)")]
-        public string? ImageID { get; set; }
+        [Column(TypeName = "int")]
+        public int? ImageID { get; set; }
         public Image? Image { get; set; }
         public virtual ICollection<InterviewProcess> InterviewProcesses { get; set; }
         

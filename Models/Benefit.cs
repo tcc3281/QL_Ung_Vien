@@ -7,9 +7,9 @@ namespace QL_Ung_Vien.Models
     {
         
         [Key]
-        [Column(TypeName ="varchar(10)")]
+        [Column(TypeName = "int")]
         [Display(Name = "Mã quyền lợi")]
-        public string benefitID {  get; set; }
+        public int benefitID {  get; set; }
         [Column(TypeName ="nvarchar(500)")]
         [StringLength(500)]
         [Display(Name = "Nội dung")]

@@ -6,9 +6,10 @@ namespace QL_Ung_Vien.Models
     public class Candidate//ứng viên
     {
         [Key]
-        [Column(TypeName = "varchar(20)")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column(TypeName = "int")]
         [Display(Name = "Mã ứng viên")]
-        public string candidateID {  get; set; }
+        public int candidateID {  get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
         [StringLength(100)]
@@ -26,11 +27,11 @@ namespace QL_Ung_Vien.Models
         [Display(Name = "Trạng thái xét tuyển")]
         public int? cStatement { get; set; }//trang thai  được nhận chưa đang xet tuyển hay gì
 
-        [Column(TypeName = "varchar(20)")]
-        public string? ImageID { get; set; }
+        [Column(TypeName = "int")]
+        public int? ImageID { get; set; }
         public Image? Image { get; set; }
-        [Column(TypeName = "varchar(20)")]
-        public string? CVID { get; set; }
+        [Column(TypeName = "int")]
+        public int? CVID { get; set; }
         public CV? CV { get; set; }
 
         [Column(TypeName = "varchar(20)")]

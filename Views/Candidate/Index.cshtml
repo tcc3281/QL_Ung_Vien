@@ -1,0 +1,72 @@
+﻿@model IEnumerable<QL_Ung_Vien.Models.Candidate>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.firstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cStatement)
+            </th>
+            @* <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CV)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.phoneNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cStatement)
+            </td>
+            @* <td>
+                @Html.DisplayFor(modelItem => item.Image.imageID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CV.cVID)
+            </td> *@
+            <td>
+                @Html.DisplayFor(modelItem => item.phoneNumber)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.candidateID" class="btn btn-primary">Edit</a> |
+                    <a asp-action="Detail" asp-route-id="@item.candidateID" class="btn btn-info">Detail</a> |
+                    <a asp-action="Delete" asp-route-id="@item.candidateID" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

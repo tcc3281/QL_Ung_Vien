@@ -6,15 +6,15 @@ namespace QL_Ung_Vien.Models
     public class Interview
     {
         [Key]
-        [Column(TypeName = "varchar(20)")]
+        [Column(TypeName = "int")]
         [Display(Name = "Mã phỏng vấn")]
-        public string interviewID { get; set; }
+        public int interviewID { get; set; }
 
-        [Column(TypeName = "varchar(20)")]
-        public string? jobID { get; set; }
+        [Column(TypeName = "int")]
+        public int? jobID { get; set; }
         public virtual Job? Job { get; set; }
-        [Column(TypeName = "varchar(20)")]
-        public string? candidateID { get; set; }
+        [Column(TypeName = "int")]
+        public int? candidateID { get; set; }
         public virtual Candidate? Candidate { get; set; }
         [Column(TypeName = "datetime")]
         [Display(Name = "Thời gian phỏng vấn")]
