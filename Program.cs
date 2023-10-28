@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using QL_Ung_Vien.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
@@ -46,5 +48,38 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
+
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var roles = new []{ "Admin","HR","Candidate"};
+    foreach(var role in roles)
+    {
+        if (! await roleManager.RoleExistsAsync(role))
+        {
+            await roleManager.CreateAsync(new IdentityRole(role));
+        }
+    }
+
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+    var _userStore = scope.ServiceProvider.GetRequiredService<IUserStore<ApplicationUser>>();
+    string email = "admin@utc.com";
+    string password = "Abc123!";
+
+    if (await userManager.FindByEmailAsync(email) == null)
+    {
+        
+        var user =new ApplicationUser();
+        user.firstName = "Admin";
+        user.lastName = "";
+        user.Email = email;
+        await _userStore.SetUserNameAsync(user, email, CancellationToken.None);
+        await userManager.CreateAsync(user, password);
+        await userManager.AddToRoleAsync(user, "Admin");
+    }
+
+
+}
+
 
 app.Run();

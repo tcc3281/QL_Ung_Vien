@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using QL_Ung_Vien.Areas.Identity.Data;
 namespace QL_Ung_Vien.Models
 {
     public class Candidate//ứng viên
@@ -40,7 +40,9 @@ namespace QL_Ung_Vien.Models
         public string? phoneNumber { get; set; }
         public virtual ICollection<Application> Application { get; set; }
         public virtual ICollection<Interview> Interviews { get; set; }
-
+        [Column(TypeName = "varchar(450)")]
+        public string? Id { get; set; }
+        public virtual ApplicationUser? ApplicationUser { get; set; }
         public Candidate()
         {
             Application = new HashSet<Application>();

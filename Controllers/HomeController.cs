@@ -12,7 +12,10 @@ namespace QL_Ung_Vien.Controllers
         {
             _logger = logger;
         }
-
+        public IActionResult Privacy()
+        {
+            return View();
+        }
         public async Task<IActionResult> Index()
         {
             return View();

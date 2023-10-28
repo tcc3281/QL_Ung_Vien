@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -21,6 +22,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using QL_Ung_Vien.Areas.Identity.Data;
+using QL_Ung_Vien.Models;
 
 namespace QL_Ung_Vien.Areas.Identity.Pages.Account
 {
@@ -33,13 +35,15 @@ namespace QL_Ung_Vien.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private ApplicationDbContext _context;
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -48,8 +52,8 @@ namespace QL_Ung_Vien.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _roleManager = roleManager;
+            _context = context;
         }
-
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
         ///     directly from your code. This API may change or be removed in future releases.
@@ -76,10 +80,10 @@ namespace QL_Ung_Vien.Areas.Identity.Pages.Account
         public class InputModel
         {
             [StringLength(100)]
-            [Display(Name ="First Name")]
+            [Display(Name ="Tên")]
             public string firstName { get; set; }
             [StringLength(100)]
-            [Display(Name = "Last Name")]
+            [Display(Name = "Họ")]
             public string lastName { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -123,7 +127,7 @@ namespace QL_Ung_Vien.Areas.Identity.Pages.Account
 
             Input = new InputModel()
             {
-                RoleList = _roleManager.Roles.Select(m => m.Name).Select(i => new SelectListItem
+                RoleList = _roleManager.Roles.Where(m=>m.Name!="Admin").Select(m => m.Name).Select(i => new SelectListItem
                 {
                     Text = i,
                     Value = i
@@ -152,7 +156,26 @@ namespace QL_Ung_Vien.Areas.Identity.Pages.Account
 
                     //sua
                     await _userManager.AddToRoleAsync(user, Input.Role);
-
+                    if (Input.Role == "Candidate")
+                    {
+                        var candidate = new Candidate();
+                        candidate.Id = user.Id;
+                        candidate.firstName = user.firstName;
+                        candidate.lastName = user.lastName;
+                        candidate.email = user.Email;
+                        _context.Candidates.Add(candidate);
+                        _context.SaveChanges();
+                    }
+                    if (Input.Role == "HR")
+                    {
+                        var hr = new HR();
+                        hr.Id = user.Id;
+                        hr.firstName = user.firstName;
+                        hr.lastName=user.lastName;
+                        hr.email = user.Email;
+                        _context.HRs.Add(hr);
+                        _context.SaveChanges();
+                    }
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

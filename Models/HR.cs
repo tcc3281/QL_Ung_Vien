@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using QL_Ung_Vien.Areas.Identity.Data;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QL_Ung_Vien.Models
@@ -27,7 +28,9 @@ namespace QL_Ung_Vien.Models
         public int? ImageID { get; set; }
         public Image? Image { get; set; }
         public virtual ICollection<InterviewProcess> InterviewProcesses { get; set; }
-        
+        [Column(TypeName = "varchar(450)")]
+        public string? Id { get; set; }
+        public virtual ApplicationUser? ApplicationUser { get; set; }
         public HR()
         {
             InterviewProcesses=new HashSet<InterviewProcess>();
