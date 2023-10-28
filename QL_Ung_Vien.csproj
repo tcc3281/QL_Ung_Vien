@@ -30,9 +30,8 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="wwwroot\CVs\Candidates\" />
     <Folder Include="wwwroot\images\candidates\" />
-    <Folder Include="wwwroot\images\hrs\" />
-    <Folder Include="wwwroot\images\jobs\" />
   </ItemGroup>
 
 </Project>

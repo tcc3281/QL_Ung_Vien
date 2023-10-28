@@ -13,6 +13,5 @@ namespace QL_Ung_Vien.Models
         [Display(Name = "Link")]
         public string? path {  get; set; }
         public IFormFile? cv;
-
     }
 }
