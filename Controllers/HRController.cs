@@ -12,9 +12,15 @@ namespace QL_Ung_Vien.Controllers
         {
             this.db = db;
         }
-        public IActionResult Index()
+        public IActionResult Index(string name)
         {
-            return View(db.HRs.ToList());
+            var hrs = from c in db.HRs select c;
+            if (!string.IsNullOrEmpty(name))
+            {
+                hrs = hrs.Where(x => (x.firstName + " " + x.lastName).Contains(name));
+            }
+
+            return View(hrs);
         }
 
         public IActionResult Create()

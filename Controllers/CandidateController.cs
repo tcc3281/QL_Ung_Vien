@@ -12,18 +12,26 @@ namespace QL_Ung_Vien.Controllers
         {
             this.db = db;
         }
-        public IActionResult Index(int statement)
+        public IActionResult Index(string name)
         {
-            if(statement == null)
+            //if (statement == null)
+            //{
+            //    return View(db.Candidates.ToList());
+            //}
+            //else
+            //{
+            //    var candidate = db.Candidates.Where(c => c.cStatement == statement)
+            //        .ToList();
+            //    return View(candidate);
+            //}
+
+            var candidates = from c in db.Candidates select c;
+            if (!string.IsNullOrEmpty(name))
             {
-                return View(db.Candidates.ToList());
+                candidates = candidates.Where(x => (x.firstName + " " + x.lastName).Contains(name));
             }
-            else
-            {
-                var candidate = db.Candidates.Where(c => c.cStatement == statement)
-                    .ToList();
-                return View(candidate);
-            }
+
+            return View(candidates);
         }
 
         public IActionResult Create()
