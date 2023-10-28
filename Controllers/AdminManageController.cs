@@ -121,7 +121,7 @@ namespace QL_Ung_Vien.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditUser(string ? id)
         {
-            return View()
+            return View();
         }
     }
 }

@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QL_Ung_Vien.Areas.Identity.Data;
 using QL_Ung_Vien.Models;
 using System.Diagnostics;
 
 namespace QL_Ung_Vien.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
