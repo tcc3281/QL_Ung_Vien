@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing.Matching;
 using Microsoft.EntityFrameworkCore;
+using PagedList;
 using QL_Ung_Vien.Areas.Identity.Data;
 using QL_Ung_Vien.Models;
 
@@ -12,15 +14,19 @@ namespace QL_Ung_Vien.Controllers
         {
             this.db = db;
         }
-        public IActionResult Index(string name)
+        public IActionResult Index(string name, int? page)
         {
-            var hrs = from c in db.HRs select c;
+            var hrs = (from c in db.HRs select c).OrderBy(x => x.hRID);
             if (!string.IsNullOrEmpty(name))
             {
-                hrs = hrs.Where(x => (x.firstName + " " + x.lastName).Contains(name));
+                hrs = (IOrderedQueryable<HR>)hrs.Where(x => (x.firstName + " " + x.lastName).Contains(name));
             }
 
-            return View(hrs);
+            if (page == null) page = 1;
+            int pageNumber = page ?? 1;
+            int pageSize = 3;
+            
+            return View(hrs.ToPagedList(pageNumber, pageSize));
         }
 
         public IActionResult Create()

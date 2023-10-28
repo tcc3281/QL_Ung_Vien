@@ -1,5 +1,5 @@
-﻿@model IEnumerable<QL_Ung_Vien.Models.Candidate>
-
+﻿@model X.PagedList.IPagedList<QL_Ung_Vien.Models.Candidate>
+@using X.PagedList.Mvc.Core
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,16 +19,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.firstName)
+                Fisrt name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.lastName)
+                Last name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.email)
+                Email
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.cStatement)
+                Statement
             </th>
             @* <th>
                 @Html.DisplayNameFor(model => model.Image)
@@ -37,7 +37,7 @@
                 @Html.DisplayNameFor(model => model.CV)
             </th> *@
             <th>
-                @Html.DisplayNameFor(model => model.phoneNumber)
+                Phone number
             </th>
             <th></th>
         </tr>
@@ -68,10 +68,60 @@
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.candidateID" class="btn btn-primary">Edit</a> |
-                    <a asp-action="Detail" asp-route-id="@item.candidateID" class="btn btn-info">Detail</a> |
-                    <a asp-action="Delete" asp-route-id="@item.candidateID" class="btn btn-danger">Delete</a>
+                <a asp-action="Detail" asp-route-id="@item.candidateID" class="btn btn-info">Detail</a> |
+                <a asp-action="Delete" asp-route-id="@item.candidateID" class="btn btn-danger">Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<br />
+<div class="pagination">
+    <ul class="pagination-list">
+        
+        @{
+            <li class="page-item">
+                <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber==1?1:Model.PageNumber-1 })">Previous</a>
+            </li>
+
+            for (int i = 1; i <= Model.PageCount; i++)
+            {
+                <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Index", new { page = i })"> @i</a>
+                </li>
+            }
+            
+            <li class="page-item">
+                <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber==Model.PageCount?Model.PageCount:Model.PageNumber+1 })">Next</a>
+            </li>
+        }
+
+    </ul>
+    <style>
+        .pagination .pagination-list {
+            justify-content: left;
+            flex-direction: row;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .page-item {
+            text-decoration: none;
+            list-style-type: none;
+        }
+
+        .pagination .page-link {
+            font-size: 1.2em;
+            color: #333;
+            text-decoration: none;
+            list-style-type: none;
+        }
+
+        .pagination .page-link.active {
+            background-color: #000;
+            color: #fff;
+            border-color: #000;
+        }
+    </style>
+</div>

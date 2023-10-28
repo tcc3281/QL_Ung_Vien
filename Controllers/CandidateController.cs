@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using QL_Ung_Vien.Areas.Identity.Data;
 using QL_Ung_Vien.Models;
+using X.PagedList;
 
 namespace QL_Ung_Vien.Controllers
 {
@@ -12,7 +13,7 @@ namespace QL_Ung_Vien.Controllers
         {
             this.db = db;
         }
-        public IActionResult Index(string name)
+        public IActionResult Index(string name, int? page)
         {
             //if (statement == null)
             //{
@@ -25,13 +26,17 @@ namespace QL_Ung_Vien.Controllers
             //    return View(candidate);
             //}
 
-            var candidates = from c in db.Candidates select c;
+            var candidates = (from c in db.Candidates select c).OrderBy( x=> x.candidateID);
             if (!string.IsNullOrEmpty(name))
             {
-                candidates = candidates.Where(x => (x.firstName + " " + x.lastName).Contains(name));
+                candidates = (IOrderedQueryable<Candidate>)candidates.Where(x => (x.firstName + " " + x.lastName).Contains(name));
             }
+            
+            if (page == null) page = 1;
+            int pageNumber = page ?? 1;
+            int pageSize = 3;
 
-            return View(candidates);
+            return View(candidates.ToPagedList(pageNumber, pageSize));
         }
 
         public IActionResult Create()
