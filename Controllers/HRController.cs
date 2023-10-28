@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing.Matching;
 using Microsoft.EntityFrameworkCore;
 using QL_Ung_Vien.Areas.Identity.Data;
@@ -62,6 +63,7 @@ namespace QL_Ung_Vien.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles="Admin, HR, Candidate")]
         public IActionResult Detail(int id)
         {
             return View(db.HRs.Find(id));
