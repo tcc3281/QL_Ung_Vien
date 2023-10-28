@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QL_Ung_Vien.Areas.Identity.Data;
 using QL_Ung_Vien.Models;
@@ -6,6 +7,7 @@ using X.PagedList;
 
 namespace QL_Ung_Vien.Controllers
 {
+    [Authorize(Roles = "HR, Admin")]
     public class CandidateController : Controller
     {
         ApplicationDbContext db;
@@ -47,15 +49,6 @@ namespace QL_Ung_Vien.Controllers
         [HttpPost]
         public IActionResult Create(Candidate c, IFormFile cv, IFormFile img)
         {
-            for(int i = 1; i <= db.Candidates.Count()+1; i++)
-            {
-                if(db.Candidates.Find(i) == null)
-                {
-                    c.candidateID = i;
-                    break;
-                }
-            }
-
             if (cv != null && img != null)
             {
                 //img

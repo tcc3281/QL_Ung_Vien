@@ -1,5 +1,7 @@
-﻿@model PagedList.IPagedList<QL_Ung_Vien.Models.HR>
-@using X.PagedList.Mvc.Core
+﻿@model IPagedList<QL_Ung_Vien.Models.HR>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using X.PagedList.Web;
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";

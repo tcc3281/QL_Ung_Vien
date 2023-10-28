@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing.Matching;
 using Microsoft.EntityFrameworkCore;
-using PagedList;
 using QL_Ung_Vien.Areas.Identity.Data;
 using QL_Ung_Vien.Models;
+using X.PagedList;
 
 namespace QL_Ung_Vien.Controllers
 {
@@ -37,15 +37,6 @@ namespace QL_Ung_Vien.Controllers
         [HttpPost]
         public IActionResult Create(HR hr)
         {
-            for (int i = 1; i <= db.HRs.Count() + 1; i++)
-            {
-                if (db.HRs.Find(i) == null)
-                {
-                    hr.hRID = i;
-                    break;
-                }
-            }
-
             db.HRs.Add(hr);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -12,8 +12,8 @@ using QL_Ung_Vien.Areas.Identity.Data;
 namespace QL_Ung_Vien.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231027015610_updDb")]
-    partial class updDb
+    [Migration("20231028140902_initDb")]
+    partial class initDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -285,8 +285,14 @@ namespace QL_Ung_Vien.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("candidateID"), 1L, 1);
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int?>("CVID")
                         .HasColumnType("int");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(450)");
 
                     b.Property<int?>("ImageID")
                         .HasColumnType("int");
@@ -310,6 +316,8 @@ namespace QL_Ung_Vien.Migrations
                         .HasColumnType("varchar(20)");
 
                     b.HasKey("candidateID");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("CVID");
 
@@ -342,6 +350,12 @@ namespace QL_Ung_Vien.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("hRID"), 1L, 1);
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Id")
+                        .HasColumnType("varchar(450)");
+
                     b.Property<int?>("ImageID")
                         .HasColumnType("int");
 
@@ -360,6 +374,8 @@ namespace QL_Ung_Vien.Migrations
                         .HasColumnType("varchar(20)");
 
                     b.HasKey("hRID");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("ImageID");
 
@@ -410,11 +426,11 @@ namespace QL_Ung_Vien.Migrations
 
             modelBuilder.Entity("QL_Ung_Vien.Models.InterviewProcess", b =>
                 {
-                    b.Property<int>("ipID")
+                    b.Property<int>("iPID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ipID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("iPID"), 1L, 1);
 
                     b.Property<int?>("InterviewResultiRID")
                         .HasColumnType("int");
@@ -431,7 +447,7 @@ namespace QL_Ung_Vien.Migrations
                     b.Property<int?>("interviewID")
                         .HasColumnType("int");
 
-                    b.HasKey("ipID");
+                    b.HasKey("iPID");
 
                     b.HasIndex("InterviewResultiRID");
 
@@ -593,6 +609,10 @@ namespace QL_Ung_Vien.Migrations
 
             modelBuilder.Entity("QL_Ung_Vien.Models.Candidate", b =>
                 {
+                    b.HasOne("QL_Ung_Vien.Areas.Identity.Data.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("QL_Ung_Vien.Models.CV", "CV")
                         .WithMany()
                         .HasForeignKey("CVID");
@@ -601,6 +621,8 @@ namespace QL_Ung_Vien.Migrations
                         .WithMany()
                         .HasForeignKey("ImageID");
 
+                    b.Navigation("ApplicationUser");
+
                     b.Navigation("CV");
 
                     b.Navigation("Image");
@@ -608,9 +630,15 @@ namespace QL_Ung_Vien.Migrations
 
             modelBuilder.Entity("QL_Ung_Vien.Models.HR", b =>
                 {
+                    b.HasOne("QL_Ung_Vien.Areas.Identity.Data.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("QL_Ung_Vien.Models.Image", "Image")
                         .WithMany()
                         .HasForeignKey("ImageID");
+
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Image");
                 });

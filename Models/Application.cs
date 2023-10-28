@@ -5,11 +5,9 @@ namespace QL_Ung_Vien.Models
 {
     public class Application//ứng tuyển
     {
-<<<<<<< HEAD
+
         [Column(TypeName ="int")]
-=======
-        [Column(TypeName = "int")]
->>>>>>> chung
+
         public int candidateID { get; set; }
         public virtual Candidate? Candidate { get; set; }
         [Column(TypeName = "int")]

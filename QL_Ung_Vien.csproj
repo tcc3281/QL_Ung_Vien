@@ -29,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\CVs\Candidates\" />
     <Folder Include="wwwroot\images\candidates\" />
   </ItemGroup>
