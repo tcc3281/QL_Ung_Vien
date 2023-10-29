@@ -57,9 +57,9 @@
                 @Html.DisplayFor(modelItem => item.Image.imageID)
             </td> *@
             <td>
+                    <a asp-action="Detail" asp-route-id="@item.hRID" class="btn btn-info">Detail</a> @* |
                     <a asp-action="Edit" asp-route-id="@item.hRID" class="btn btn-primary">Edit</a> |
-                    <a asp-action="Detail" asp-route-id="@item.hRID" class="btn btn-info">Detail</a> |
-                    <a asp-action="Delete" asp-route-id="@item.hRID" class="btn btn-danger">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.hRID" class="btn btn-danger">Delete</a> *@
             </td>
         </tr>
 }
