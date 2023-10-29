@@ -74,11 +74,10 @@ namespace QL_Ung_Vien.Controllers
             {
                 return NotFound();
             }
-
-            candidate.firstName = c.firstName;
-            candidate.lastName = c.lastName;
-            candidate.email = c.email;
-            candidate.phoneNumber = c.phoneNumber;
+            var user = db.Users.FirstOrDefault(x => x.Id == candidate.Id);
+            user.firstName = candidate.firstName = c.firstName;
+            user.lastName= candidate.lastName = c.lastName;
+            user.PhoneNumber=candidate.phoneNumber = c.phoneNumber;
             //giúp chạy đồng bộ
             await SaveImg(c, candidate);
             await SaveCV(c, candidate);
@@ -103,9 +102,8 @@ namespace QL_Ung_Vien.Controllers
             {
                 NotFound();
             }
-            ViewBag.Id = id;
             Image temp= db.Images.Where(m => m.imageID == candidate.ImageID).FirstOrDefault();
-            ViewBag.url=ConvertPath(temp.path);
+            ViewBag.url = CandidateController.ConvertPath(temp.path);
             return View(candidate);
         }
 

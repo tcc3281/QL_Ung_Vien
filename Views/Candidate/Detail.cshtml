@@ -44,9 +44,13 @@
                     @Html.DisplayFor(model => model.phoneNumber)
                 </dd>
                 <div>
-
-                    <a href="@Url.Action("DownloadCV", new { id = Model.candidateID })" class="btn btn-outline-info text-infor"> DownLoad CV </a>
-
+                    <div>
+                        <a href="@Url.Action("DownloadCV", new { id = Model.candidateID })" class="btn btn-outline-info text-infor"> DownLoad CV </a>
+                    </div>
+                    <div>
+                        <a asp-action="Edit" asp-route-id="@Model?.candidateID" class="btn btn-primary">Edit</a> |
+                        <a asp-action="Index" class="btn btn-dark">Back to List</a>
+                    </div>
                 </div>
                 
             </dl>
@@ -61,7 +65,4 @@
     </div>
     
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.candidateID" class="btn btn-primary">Edit</a> |
-    <a asp-action="Index" class="btn btn-dark">Back to List</a>
-</div>
+

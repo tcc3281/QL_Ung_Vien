@@ -63,11 +63,10 @@ namespace QL_Ung_Vien.Controllers
             {
                 return NotFound();
             }
-
-            hr.firstName = h.firstName;
-            hr.lastName = h.lastName;
-            hr.email = h.email;
-            hr.phoneNumber = h.phoneNumber;
+            var user = db.Users.FirstOrDefault(x => x.Id == hr.Id);
+            user.firstName= hr.firstName = h.firstName;
+            user.lastName= hr.lastName = h.lastName;
+            user.PhoneNumber = hr.phoneNumber = h.phoneNumber;
             await SaveImg(h, hr);
 
             // Thêm phương thức await vào lệnh này để lưu dữ liệu đồng bộ và an toàn
@@ -91,6 +90,8 @@ namespace QL_Ung_Vien.Controllers
             }
             Image temp = db.Images.Where(m => m.imageID == hr.ImageID).FirstOrDefault();
             ViewBag.url = CandidateController.ConvertPath(temp.path);
+            Console.Write("");
+            Console.Write(ViewBag.url);
             return View(db.HRs.Find(id));
         }
 
@@ -114,10 +115,7 @@ namespace QL_Ung_Vien.Controllers
                 i.path = folder;
                 
                 string serverFolder = Path.Combine(_environment.WebRootPath, folder);
-                Console.WriteLine("");
-                Console.WriteLine(folder);
-                Console.WriteLine(i.path);
-                Console.WriteLine(serverFolder);
+               
 
                 await h.image.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
                 await db.AddAsync(i);
