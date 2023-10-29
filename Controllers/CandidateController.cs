@@ -117,40 +117,47 @@ namespace QL_Ung_Vien.Controllers
         {
             if (c.image != null)
             {
-                // Sử dụng _environment.WebRootPath để lấy đường dẫn vật lý của thư mục gốc
-                string folder =  "..\\wwwroot\\images\\";
-                folder += Guid.NewGuid().ToString() + "_" + c.image.FileName;
+                if (Image.IsImageFile(c.image.FileName))
+                {
+                    // Sử dụng _environment.WebRootPath để lấy đường dẫn vật lý của thư mục gốc
+                    string folder = "..\\wwwroot\\images\\";
+                    folder += Guid.NewGuid().ToString() + "_" + c.image.FileName;
 
-                var i = new Image();
-                i.path = folder;
+                    var i = new Image();
+                    i.path = folder;
 
-                string serverFolder = Path.Combine(_environment.WebRootPath, folder);
+                    string serverFolder = Path.Combine(_environment.WebRootPath, folder);
 
-                await c.image.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
-                db.Add(i);
-                // Lưu đối tượng i vào database trước khi gán giá trị cho thuộc tính CVID
-                await db.SaveChangesAsync();
-                candidate.ImageID = i.imageID;
+                    await c.image.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                    db.Add(i);
+                    // Lưu đối tượng i vào database trước khi gán giá trị cho thuộc tính CVID
+                    await db.SaveChangesAsync();
+                    candidate.ImageID = i.imageID;
+                }
+                
             }
         }
         public async Task SaveCV(Candidate c, Candidate candidate)
         {
             if (c.cv != null)
             {
-                // Sử dụng _environment.WebRootPath để lấy đường dẫn vật lý của thư mục gốc
-                string folder = "..\\wwwroot\\CVs\\";
-                folder += Guid.NewGuid().ToString() + "_" + c.cv.FileName;
+                if (CV.IsPDFFile(c.cv.FileName))
+                {
+                    // Sử dụng _environment.WebRootPath để lấy đường dẫn vật lý của thư mục gốc
+                    string folder = "..\\wwwroot\\CVs\\";
+                    folder += Guid.NewGuid().ToString() + "_" + c.cv.FileName;
 
-                var i = new CV();
-                i.path = folder;
+                    var i = new CV();
+                    i.path = folder;
 
-                string serverFolder = Path.Combine(_environment.WebRootPath, folder);
+                    string serverFolder = Path.Combine(_environment.WebRootPath, folder);
 
-                await c.cv.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
-                db.Add(i);
-                // Lưu đối tượng i vào database trước khi gán giá trị cho thuộc tính CVID
-                await db.SaveChangesAsync();
-                candidate.CVID = i.cVID;
+                    await c.cv.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                    db.Add(i);
+                    // Lưu đối tượng i vào database trước khi gán giá trị cho thuộc tính CVID
+                    await db.SaveChangesAsync();
+                    candidate.CVID = i.cVID;
+                }
             }
         }
     }

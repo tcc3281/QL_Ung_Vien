@@ -92,21 +92,26 @@ namespace QL_Ung_Vien.Controllers
         {
             if (h.image != null)
             {
-                // Sử dụng _environment.WebRootPath để lấy đường dẫn vật lý của thư mục gốc
-                string folder = "..\\wwwroot\\images\\";
-                folder += Guid.NewGuid().ToString() + "_" + h.image.FileName;
+                if (Image.IsImageFile(h.image.FileName))
+                {
+                    // Sử dụng _environment.WebRootPath để lấy đường dẫn vật lý của thư mục gốc
+                    string folder = "..\\wwwroot\\images\\";
+                    folder += Guid.NewGuid().ToString() + "_" + h.image.FileName;
 
-                var i = new Image();
-                i.path = folder;
+                    var i = new Image();
+                    i.path = folder;
 
-                string serverFolder = Path.Combine(_environment.WebRootPath, folder);
+                    string serverFolder = Path.Combine(_environment.WebRootPath, folder);
 
-                await h.image.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
-                db.Add(i);
-                // Lưu đối tượng i vào database trước khi gán giá trị cho thuộc tính CVID
-                await db.SaveChangesAsync();
-                hr.ImageID = i.imageID;
+                    await h.image.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                    db.Add(i);
+                    // Lưu đối tượng i vào database trước khi gán giá trị cho thuộc tính CVID
+                    await db.SaveChangesAsync();
+                    hr.ImageID = i.imageID;
+                }
+                
             }
         }
+
     }
 }
