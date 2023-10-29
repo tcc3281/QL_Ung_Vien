@@ -1,0 +1,65 @@
+﻿@model QL_Ung_Vien.Models.Job
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Job</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="benifitID" class="control-label"></label>
+                <input asp-for="benifitID" class="form-control" />
+                <span asp-validation-for="benifitID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="requirementID" class="control-label"></label>
+                <input asp-for="requirementID" class="form-control" />
+                <span asp-validation-for="requirementID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="jobName" class="control-label"></label>
+                <input asp-for="jobName" class="form-control" />
+                <span asp-validation-for="jobName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="jD" class="control-label"></label>
+                <input asp-for="jD" class="form-control" />
+                <span asp-validation-for="jD" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="timeOpen" class="control-label"></label>
+                <input asp-for="timeOpen" class="form-control" />
+                <span asp-validation-for="timeOpen" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="timeClose" class="control-label"></label>
+                <input asp-for="timeClose" class="form-control" />
+                <span asp-validation-for="timeClose" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="ImageID" class="control-label"></label>
+                <select asp-for="ImageID" class ="form-control" asp-items="ViewBag.ImageID"></select>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-dark">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
