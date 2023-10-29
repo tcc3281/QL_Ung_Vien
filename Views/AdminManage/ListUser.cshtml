@@ -7,45 +7,64 @@
     ViewData["Title"] = "List Users";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <h2>Danh sách tài khoản</h2>
-    <div id="UserList">
-        <table class="table table-striped table-hover">
-            <thead>
+@await Component.InvokeAsync("Role")
+<div id="UserList">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Role
+                <th />
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <th>Id</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
-                    <th>Role<th/>
+                    <td><a asp-route-detail="@item.Id" asp-action="Detail">@item.Id</a></td>
+                    <td>@item.firstName</td>
+                    <td>@item.lastName</td>
+                    <td>@item.Email</td>
+                    <td>@item.PhoneNumber</td>
+                    <td>@item.ChucVu</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td><a asp-route-detail="@item.Id" asp-action="Detail">@item.Id</a></td>
-                        <td>@item.firstName</td>
-                        <td>@item.lastName</td>
-                        <td>@item.Email</td>
-                        <td>@item.PhoneNumber</td>
-                        <td>@item.ChucVu</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+            }
+        </tbody>
+    </table>
     <br />
-    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("ListUser", new { page }),
+    @Html.PagedListPager(Model, page => Url.Action("ListUser", new { page, filter = ViewBag.filter,view = ViewBag.id }),
     PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
-        new PagedListRenderOptions()
-        {
-            LiElementClasses = new string[] { "page-item" },
-            PageClasses = new string[] { "page-link" }
-        },
-        new AjaxOptions()
-        {
-            HttpMethod = "GET",
-            UpdateTargetId = "UserList"
-        }))
+    new PagedListRenderOptions()
+    {
+    LiElementClasses = new string[] { "page-item" },
+    PageClasses = new string[] { "page-link" }
+    },
+    new AjaxOptions()
+    {
+    HttpMethod = "GET",
+    UpdateTargetId = "UserList"
+    }))
+
+</div>
+   
+@section Scripts{
+    <script>
+        $(".dropdown-item").click(function (e) {
+            var id = $(this).attr("id")//lấy giá trị id đầy tiên
+            console.log(id)
+            $.ajax({
+                url: "ListUser",
+                data: {page:1, filter: id },
+                success: function (response) {
+                    $("div#UserList").html(response);
+                }
+            });
+        });
+    </script>
+}

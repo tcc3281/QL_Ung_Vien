@@ -24,9 +24,9 @@ namespace QL_Ung_Vien.Controllers
             var role = _roleManager.Roles;
             return View(role);
         }
-        public async Task<IActionResult> ListUser(int ? page)
+        public IActionResult ListUser(int? page,string ? filter,string? view)
         {
-            int pageSize = 7;
+            int pageSize = 2;
             int pagenumber = (page ?? 1);
             if (Context.Users == null)
             {
@@ -42,17 +42,37 @@ namespace QL_Ung_Vien.Controllers
                             lastName = a.lastName,
                             Email = a.Email,
                             PhoneNumber = a.PhoneNumber,
+                            RoleId = b.RoleId,
                             ChucVu = c.Name
 
                         };
             dynamic model;
             model = query.ToPagedList(pagenumber, pageSize);
+            ViewBag.filter = filter;
+            Console.WriteLine("");
+            Console.WriteLine(filter);
 
-            if (model == null)
+            
+            if (filter == null)
             {
-                return NotFound();
+                model = query.ToPagedList(pagenumber, pageSize);
+                return View(model);
             }
-            return PartialView(model);
+            else if(filter == "all")
+            {
+                model = query.ToPagedList(pagenumber, pageSize);
+                ViewBag.id = "par";
+                if (view != "par") return PartialView("TableAccount", model);
+                else return View(model);
+            }
+            else
+            {
+                ViewBag.id = "par";
+                model = query.Where(m => m.RoleId == filter).ToPagedList(pagenumber, pageSize);
+                if (view != "par") return PartialView("TableAccount", model);
+                else return View(model);
+            }
+            
         }
 
         [HttpGet]

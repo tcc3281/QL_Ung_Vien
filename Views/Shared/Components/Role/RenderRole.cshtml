@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+<div class="dropdown">
+    <a class="text-dark dropdown-toggle btn btn-outline-primary"  id="RoleFillter" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Filter
+    </a>
+    <div class="dropdown-menu" aria-labelledby="RoleFillter">
+        <a class="dropdown-item text-dark" id="all">_</a>
+        @foreach(var item in Model)
+        {
+             <a class="dropdown-item text-dark" id="@item.Id">@item.Name</a>
+        }
+    </div>
+</div>
