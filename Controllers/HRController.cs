@@ -76,5 +76,10 @@ namespace QL_Ung_Vien.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public IActionResult CreateJob()
+        {
+            return RedirectToAction("Create", "Job");
+        }
     }
 }
