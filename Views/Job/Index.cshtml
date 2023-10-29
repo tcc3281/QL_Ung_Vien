@@ -6,23 +6,28 @@
 }
 
 <h1>Index</h1>
+@if (!User.IsInRole("Candidate"))
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+}
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Create New</a>
-</p>
-<table class="table">
+<table class="table" style="table-layout: fixed;width: 100%;">
     <thead>
         <tr>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.benifitID)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Requirement)
-            </th>
+            </th> *@
             <th>
                 @Html.DisplayNameFor(model => model.jobName)
             </th>
-            <th>
+            <th style="max-width: 70%;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;">
                 @Html.DisplayNameFor(model => model.jD)
             </th>
             <th>
@@ -34,18 +39,17 @@
             @*<th>
                 @Html.DisplayNameFor(model => model.Image)
             </th>*@
-            <th>Chức năng</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
+            @* <td>
                 @Html.DisplayFor(modelItem => item.benifitID)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Requirement)
-            </td>
+            </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.jobName)
             </td>
@@ -61,11 +65,20 @@
             @*<td>
                 @Html.DisplayFor(modelItem => item.Image.imageID)
             </td>*@
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.jobID" class="btn btn-primary>Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.jobID" class="btn btn-info">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.jobID" class="btn btn-danger">Delete</a>
-            </td>
+            @if (!User.IsInRole("Candidate"))
+            {
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.jobID" class="btn btn-info">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@item.jobID" class="btn btn-primary">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.jobID" class="btn btn-danger">Delete</a>
+                </td>
+            }
+            else
+            {
+                <td>
+                        <a asp-action="Details" asp-route-id="@item.jobID" class="btn btn-info">Details</a>
+                </td>
+            }
         </tr>
 }
     </tbody>

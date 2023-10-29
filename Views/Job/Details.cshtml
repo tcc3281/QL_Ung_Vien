@@ -11,7 +11,7 @@
     <h4>Job</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        @* <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.benifitID)
         </dt>
         <dd class = "col-sm-10">
@@ -22,7 +22,7 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Requirement.requirementID)
-        </dd>
+        </dd> *@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.jobName)
         </dt>
@@ -32,7 +32,7 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.jD)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.jD)
         </dd>
         <dt class = "col-sm-2">
@@ -56,6 +56,21 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.jobID">Edit</a> |
+    @if (!User.IsInRole("Candidate"))
+    {
+        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model?.jobID">Edit</a> <br />
+        <a asp-action="CandidateApply" class="btn btn-primary" asp-route-id="@Model?.jobID">Application</a> <br />
+    }
+    else
+    {
+        if(ViewBag.aStatement == null)
+        {
+            <a asp-action="CandidateApply" class="btn btn-success" asp-route-id="@Model?.jobID">Apply</a> <br />
+        }
+        else
+        {
+            <a asp-action="CandidateApply" class="btn btn-success" asp-route-id="@Model?.jobID">UnApply</a> <br />
+        }
+    }
     <a asp-action="Index" class="btn btn-dark">Back to List</a>
 </div>

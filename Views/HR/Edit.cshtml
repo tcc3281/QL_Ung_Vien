@@ -46,9 +46,13 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index" class="btn btn-dark">Back to List</a>
-</div>
+@if (User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-action="Index" class="btn btn-dark">Back to List</a>
+    </div>
+}
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

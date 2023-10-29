@@ -13,7 +13,7 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            @* <div class="form-group">
                 <label asp-for="benifitID" class="control-label"></label>
                 <input asp-for="benifitID" class="form-control" />
                 <span asp-validation-for="benifitID" class="text-danger"></span>
@@ -22,7 +22,7 @@
                 <label asp-for="requirementID" class="control-label"></label>
                 <input asp-for="requirementID" class="form-control" />
                 <span asp-validation-for="requirementID" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="form-group">
                 <label asp-for="jobName" class="control-label"></label>
                 <input asp-for="jobName" class="form-control" />
@@ -30,7 +30,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="jD" class="control-label"></label>
-                <input asp-for="jD" class="form-control" />
+                <textarea style="width: 100%; height: 100px;" asp-for="jD" class="form-control">
+
+                </textarea>
                 <span asp-validation-for="jD" class="text-danger"></span>
             </div>
             <div class="form-group">

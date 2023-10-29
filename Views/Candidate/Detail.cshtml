@@ -1,4 +1,5 @@
-﻿@model QL_Ung_Vien.Models.Candidate
+﻿@using System.Security.Claims;
+@model QL_Ung_Vien.Models.Candidate
 
 @{
     ViewData["Title"] = "Detail";
@@ -56,6 +57,13 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.candidateID" class="btn btn-primary">Edit</a> |
+    @{
+        var idUser = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (User.IsInRole("Admin") || idUser == Model.Id)
+        {
+            <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model?.candidateID">Edit</a> <br />
+
+        }
+    }
     <a asp-action="Index" class="btn btn-dark">Back to List</a>
 </div>

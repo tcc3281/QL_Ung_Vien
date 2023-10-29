@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Cryptography.Pkcs;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using QL_Ung_Vien.Areas.Identity.Data;
 using QL_Ung_Vien.Models;
@@ -56,13 +59,9 @@ namespace QL_Ung_Vien.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Job job)
         {
-            if (ModelState.IsValid)
-            {
-                db.Add(job);
-                db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(job);
+            db.Jobs.Add(job);
+            db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Job/Edit/5
@@ -88,23 +87,14 @@ namespace QL_Ung_Vien.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Job job)
         {
-            if (ModelState.IsValid)
-            {
-                var jb = db.Jobs.Find(job.jobID);
-                jb.benifitID = job.benifitID;
-                jb.Benefit = job.Benefit;
-                jb.requirementID = job.requirementID;
-                jb.Requirement = job.Requirement;
-                jb.jobName = job.jobName;
-                jb.jD=job.jD;
-                jb.timeOpen = job.timeOpen;
-                jb.timeClose = job.timeClose;
-
-                return RedirectToAction(nameof(Index));
-            }
-            return View(job);
+            var jb = db.Jobs.Find(job.jobID);
+            jb.jobName = job.jobName;
+            jb.jD = job.jD;
+            jb.timeOpen = job.timeOpen;
+            jb.timeClose = job.timeClose;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
-
 
         public IActionResult Delete(int id)
         {
@@ -114,5 +104,95 @@ namespace QL_Ung_Vien.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult CandidateApply(int id)
+        {
+            if(id == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            //lấy id user của candidate
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var candidate = db.Candidates.Where(c => c.Id == userID).FirstOrDefault();
+
+            var application = db.Applications.FirstOrDefault(a => a.candidateID == candidate.candidateID && a.jobID == id);
+            if (application == null)
+            {
+                application = new Application() { 
+                    candidateID = candidate.candidateID,
+                    Candidate = candidate,
+                    jobID = id,
+                    Job = db.Jobs.Find(id),
+                    applyDate = DateTime.Now,
+                    aStatement = 0
+                };
+                db.Applications.Add(application);
+
+                db.SaveChanges();
+
+                ViewBag.aStatement = application.aStatement;
+            }
+
+            var listJob = from a in db.Jobs
+                          join b in db.Applications on a.jobID equals b.jobID
+                          where b.candidateID == candidate.candidateID
+                          select new
+                          {
+                              jobID = a.jobID,
+                              jobName = a.jobName,
+                              des = a.jD,
+                              JobStatement = b.aStatement
+                          };
+            dynamic model;
+            model = listJob.ToList();
+
+            return RedirectToAction("ShowApply");
+        }
+
+        public IActionResult UnApply(int id)
+        {
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var candidate = db.Candidates.Where(c => c.Id == userID).FirstOrDefault();
+
+            var application = db.Applications.FirstOrDefault(a => a.candidateID == candidate.candidateID && a.jobID == id);
+            db.Applications.Remove(application);
+            db.SaveChanges();
+            
+            var listJob = from a in db.Jobs
+                          join b in db.Applications on a.jobID equals b.jobID
+                          where b.candidateID == candidate.candidateID
+                          select new
+                          {
+                              jobID = a.jobID,
+                              jobName = a.jobName,
+                              des = a.jD,
+                              JobStatement = b.aStatement
+                          };
+            dynamic model;
+            model = listJob.ToList();
+
+            return View("CandidateApply", model);
+        }
+
+        public IActionResult ShowApply()
+        {
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var candidate = db.Candidates.Where(c => c.Id == userID).FirstOrDefault();
+
+            var listJob = from a in db.Jobs
+                          join b in db.Applications on a.jobID equals b.jobID
+                          where b.candidateID == candidate.candidateID
+                          select new
+                          {
+                              jobID = a.jobID,
+                              jobName = a.jobName,
+                              des = a.jD,
+                              JobStatement = b.aStatement
+                          };
+            dynamic model;
+            model = listJob.ToList();
+
+            return View("CandidateApply", model);
+        }
     }
 }

@@ -34,13 +34,13 @@ namespace QL_Ung_Vien.Controllers
             if(user1 != null) 
             {
                 int canID = user1.candidateID;
-                Console.WriteLine("Hello " + idUser);
+                //Console.WriteLine("Hello " + idUser);
                 return RedirectToAction("Detail", "Candidate", new { id =  canID});
             }
             else
             {
                 int hrID = user2.hRID;
-                Console.WriteLine("Hello " + idUser);
+                //Console.WriteLine("Hello " + idUser);
                 return RedirectToAction("Detail", "HR", new { id = hrID });
             }
         }

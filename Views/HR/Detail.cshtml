@@ -1,4 +1,7 @@
-﻿@model QL_Ung_Vien.Models.HR
+﻿@using System.Security.Claims;
+@using Microsoft.AspNetCore.Identity;
+@using QL_Ung_Vien.Areas.Identity.Data;
+@model QL_Ung_Vien.Models.HR
 
 @{
     ViewData["Title"] = "Detail";
@@ -44,6 +47,14 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model?.hRID">Edit</a> |
+    @{
+        var idUser = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        if (User.IsInRole("Admin") || idUser == Model.Id)
+        {
+            <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model?.hRID">Edit</a> <br />
+        
+        }
+    }
+    
     <a asp-action="Index" class="btn btn-dark">Back to List</a>
 </div>
