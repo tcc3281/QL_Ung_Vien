@@ -34,6 +34,8 @@ namespace QL_Ung_Vien.Models
 
         public virtual ICollection<Application> Applications { get; set; }
         public virtual ICollection<Interview> Interviews { get; set; }
+        [NotMapped]
+        public IFormFile? image { get; set; }
 
         public Job()
         {

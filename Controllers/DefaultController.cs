@@ -25,14 +25,24 @@ namespace QL_Ung_Vien.Controllers
             var userDetails = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
-            string firstName = applicationUser?.firstName;
-            string lastName = applicationUser?.lastName;
-            string iduser = applicationUser?.Id;
+            string idUser = applicationUser?.Id;
             // Hiển thị thông tin người dùng
-            var Candidate = db.Candidates.Where(c => c.Id == iduser).FirstOrDefault();
-            int canID = Candidate.candidateID;
-            Console.WriteLine("Hello " + iduser);
-            return RedirectToAction("Detail", "Candidate", new { id =  canID});
+
+            var user1 = db.Candidates.Where(c => c.Id == idUser).FirstOrDefault();
+            var user2 = db.HRs.Where(h => h.Id == idUser).FirstOrDefault();
+            
+            if(user1 != null) 
+            {
+                int canID = user1.candidateID;
+                Console.WriteLine("Hello " + idUser);
+                return RedirectToAction("Detail", "Candidate", new { id =  canID});
+            }
+            else
+            {
+                int hrID = user2.hRID;
+                Console.WriteLine("Hello " + idUser);
+                return RedirectToAction("Detail", "HR", new { id = hrID });
+            }
         }
     }
 }
