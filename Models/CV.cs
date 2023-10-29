@@ -12,6 +12,6 @@ namespace QL_Ung_Vien.Models
         [Column(TypeName = "varchar(500)")]
         [Display(Name = "Link")]
         public string? path {  get; set; }
-        public IFormFile? cv;
+        public CV() { }
     }
 }
