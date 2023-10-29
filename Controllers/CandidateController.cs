@@ -33,35 +33,6 @@ namespace QL_Ung_Vien.Controllers
 
             return View(candidates.ToPagedList(pageNumber, pageSize));
         }
-
-        public IActionResult Create()
-        {
-            return View();
-        }
-        
-        [HttpPost]
-        public async Task<IActionResult> Create(Candidate c)
-        {
-            return RedirectToAction("Detail", "Default ", new { id = c.Id });
-        }
-
-        public IActionResult Edit(int id)
-        {
-            if (id == null || db.Candidates == null)
-            {
-                return NotFound();
-            }
-
-            var candidate = db.Candidates.Find(id);
-
-            if (candidate == null)
-            {
-                NotFound();
-            }
-
-            return View(candidate);
-        }
-
         // Action để chỉnh sửa thông tin của ứng viên
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken] // Thêm tham số này để ngăn chặn tấn công giả mạo yêu cầu

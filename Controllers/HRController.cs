@@ -33,19 +33,7 @@ namespace QL_Ung_Vien.Controllers
             return View(hrs.ToPagedList(pageNumber, pageSize));
         }
 
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult Create(HR hr)
-        {
-            db.HRs.Add(hr);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
+        
         public IActionResult Edit(int id)
         {
             var hr = db.HRs.Find(id);
