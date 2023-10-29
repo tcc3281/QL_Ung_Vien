@@ -68,7 +68,7 @@ namespace QL_Ung_Vien.Controllers
             hr.lastName = h.lastName;
             hr.email = h.email;
             hr.phoneNumber = h.phoneNumber;
-            SaveImg(h, hr);
+            await SaveImg(h, hr);
 
             // Thêm phương thức await vào lệnh này để lưu dữ liệu đồng bộ và an toàn
             await db.SaveChangesAsync();
@@ -78,6 +78,19 @@ namespace QL_Ung_Vien.Controllers
         [Authorize(Roles="Admin, HR, Candidate")]
         public IActionResult Detail(int id)
         {
+            if (id == null || db.Candidates == null)
+            {
+                return NotFound();
+            }
+
+            var hr = db.HRs.Find(id);
+
+            if (hr == null)
+            {
+                NotFound();
+            }
+            Image temp = db.Images.Where(m => m.imageID == hr.ImageID).FirstOrDefault();
+            ViewBag.url = CandidateController.ConvertPath(temp.path);
             return View(db.HRs.Find(id));
         }
 
@@ -92,24 +105,27 @@ namespace QL_Ung_Vien.Controllers
         {
             if (h.image != null)
             {
-                if (Image.IsImageFile(h.image.FileName))
-                {
-                    // Sử dụng _environment.WebRootPath để lấy đường dẫn vật lý của thư mục gốc
-                    string folder = "..\\wwwroot\\images\\";
-                    folder += Guid.NewGuid().ToString() + "_" + h.image.FileName;
-
-                    var i = new Image();
-                    i.path = folder;
-
-                    string serverFolder = Path.Combine(_environment.WebRootPath, folder);
-
-                    await h.image.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
-                    db.Add(i);
-                    // Lưu đối tượng i vào database trước khi gán giá trị cho thuộc tính CVID
-                    await db.SaveChangesAsync();
-                    hr.ImageID = i.imageID;
-                }
                 
+                // Sử dụng _environment.WebRootPath để lấy đường dẫn vật lý của thư mục gốc
+                string folder = "..\\wwwroot\\images\\";
+                folder += Guid.NewGuid().ToString() + "_" + h.image.FileName;
+
+                var i = new Image();
+                i.path = folder;
+                
+                string serverFolder = Path.Combine(_environment.WebRootPath, folder);
+                Console.WriteLine("");
+                Console.WriteLine(folder);
+                Console.WriteLine(i.path);
+                Console.WriteLine(serverFolder);
+
+                await h.image.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                await db.AddAsync(i);
+                // Lưu đối tượng i vào database trước khi gán giá trị cho thuộc tính CVID
+                
+                await db.SaveChangesAsync();
+
+                hr.ImageID = i.imageID;
             }
         }
 
