@@ -32,6 +32,12 @@ namespace QL_Ung_Vien.Models
         [Column(TypeName = "int")]
         public int? CVID { get; set; }
         public CV? CV { get; set; }
+        [NotMapped]
+        [Display(Name ="Ảnh")]
+        public IFormFile? image { get; set; }
+        [NotMapped]
+        [Display(Name = "CV")]
+        public IFormFile? cv { get; set; }
 
         [Column(TypeName = "varchar(20)")]
         [StringLength(20, MinimumLength = 5, ErrorMessage = "Độ dài không phù hợp")]

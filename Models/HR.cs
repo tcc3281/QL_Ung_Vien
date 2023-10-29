@@ -31,6 +31,9 @@ namespace QL_Ung_Vien.Models
         [Column(TypeName = "varchar(450)")]
         public string? Id { get; set; }
         public virtual ApplicationUser? ApplicationUser { get; set; }
+        [NotMapped]
+        [Display(Name = "Ảnh")]
+        public IFormFile? image { get; set; }
         public HR()
         {
             InterviewProcesses=new HashSet<InterviewProcess>();
