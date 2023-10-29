@@ -4,7 +4,7 @@ using QL_Ung_Vien.Areas.Identity.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-
+using QL_Ung_Vien.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
@@ -78,7 +78,16 @@ using (var scope = app.Services.CreateScope())
         await userManager.AddToRoleAsync(user, "Admin");
     }
 
-
+    var _context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    
+    if(_context.Images.FirstOrDefault(i=>i.path == "..\\wwwroot\\images\\user.png") == null)
+    {
+        var i = new Image();
+        i.path = "..\\wwwroot\\images\\user.png";
+        _context.Images.Add(i);
+        _context.SaveChanges();
+    }
+    
 }
 
 

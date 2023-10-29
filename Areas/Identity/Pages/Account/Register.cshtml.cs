@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using QL_Ung_Vien.Areas.Identity.Data;
 using QL_Ung_Vien.Models;
@@ -163,6 +164,7 @@ namespace QL_Ung_Vien.Areas.Identity.Pages.Account
                         candidate.firstName = user.firstName;
                         candidate.lastName = user.lastName;
                         candidate.email = user.Email;
+                        candidate.ImageID = _context.Images.FirstOrDefault(u => u.path == "..\\wwwroot\\images\\user.png").imageID;
                         _context.Candidates.Add(candidate);
                         _context.SaveChanges();
                     }
@@ -173,6 +175,7 @@ namespace QL_Ung_Vien.Areas.Identity.Pages.Account
                         hr.firstName = user.firstName;
                         hr.lastName=user.lastName;
                         hr.email = user.Email;
+                        hr.ImageID = _context.Images.FirstOrDefault(u => u.path == "..\\wwwroot\\images\\user.png").imageID;
                         _context.HRs.Add(hr);
                         _context.SaveChanges();
                     }

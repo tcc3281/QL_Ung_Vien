@@ -16,6 +16,7 @@ namespace QL_Ung_Vien.Controllers
         {
             _roleManager = roleManager;
             Context = context;
+            
         }
         //List all roles are created by users
         public IActionResult Index()
