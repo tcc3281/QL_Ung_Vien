@@ -10,10 +10,13 @@ namespace QL_Ung_Vien.Controllers
 {
     public class HRController : Controller
     {
-        ApplicationDbContext db;
-        public HRController(ApplicationDbContext db)
+        private ApplicationDbContext db;
+        private readonly IWebHostEnvironment _environment;
+
+        public HRController(ApplicationDbContext db, IWebHostEnvironment environment)
         {
             this.db = db;
+            _environment = environment;
         }
         public IActionResult Index(string name, int? page)
         {
@@ -49,17 +52,26 @@ namespace QL_Ung_Vien.Controllers
             return View(hr);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Edit(HR hr)
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken] // Thêm tham số này để ngăn chặn tấn công giả mạo yêu cầu
+        public async Task<IActionResult> Edit(HR h)
         {
-            var h = db.HRs.Find(hr.hRID);
+            var hr = db.HRs.Find(h.hRID);
 
-            h.firstName = hr.firstName;
-            h.lastName = hr.lastName;
-            h.email = hr.email;
-            h.phoneNumber = hr.phoneNumber;
-            db.SaveChanges();
+            // Thêm điều kiện này để kiểm tra ứng viên có tồn tại hay không
+            if (hr == null)
+            {
+                return NotFound();
+            }
 
+            hr.firstName = h.firstName;
+            hr.lastName = h.lastName;
+            hr.email = h.email;
+            hr.phoneNumber = h.phoneNumber;
+            SaveImg(h, hr);
+
+            // Thêm phương thức await vào lệnh này để lưu dữ liệu đồng bộ và an toàn
+            await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -76,10 +88,30 @@ namespace QL_Ung_Vien.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        public IActionResult CreateJob()
+        public async Task SaveImg(HR h, HR hr)
         {
-            return RedirectToAction("Create", "Job");
+            if (h.image != null)
+            {
+                if (Image.IsImageFile(h.image.FileName))
+                {
+                    // Sử dụng _environment.WebRootPath để lấy đường dẫn vật lý của thư mục gốc
+                    string folder = "..\\wwwroot\\images\\";
+                    folder += Guid.NewGuid().ToString() + "_" + h.image.FileName;
+
+                    var i = new Image();
+                    i.path = folder;
+
+                    string serverFolder = Path.Combine(_environment.WebRootPath, folder);
+
+                    await h.image.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+                    db.Add(i);
+                    // Lưu đối tượng i vào database trước khi gán giá trị cho thuộc tính CVID
+                    await db.SaveChangesAsync();
+                    hr.ImageID = i.imageID;
+                }
+                
+            }
         }
+
     }
 }

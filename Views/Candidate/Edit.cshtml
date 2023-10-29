@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="candidateID" />
             <div class="form-group">
@@ -34,16 +34,16 @@
                 <input asp-for="cStatement" class="form-control" />
                 <span asp-validation-for="cStatement" class="text-danger"></span>
             </div>
-            @* <div class="form-group">
-                <label asp-for="ImageID" class="control-label"></label>
-                <select asp-for="ImageID" class="form-control" asp-items="ViewBag.ImageID"></select>
-                <span asp-validation-for="ImageID" class="text-danger"></span>
+            <div class="form-group">
+                <label asp-for="image" class="control-label"></label>
+                <input asp-for="image" class="form-control"></input>
+                <span asp-validation-for="image" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CVID" class="control-label"></label>
-                <select asp-for="CVID" class="form-control" asp-items="ViewBag.CVID"></select>
-                <span asp-validation-for="CVID" class="text-danger"></span>
-            </div> *@
+                <label asp-for="cv" class="control-label"></label>
+                <input asp-for="cv" class="form-control"></input>
+                <span asp-validation-for="cv" class="text-danger"></span>
+            </div> 
             <div class="form-group">
                 <label asp-for="phoneNumber" class="control-label"></label>
                 <input asp-for="phoneNumber" class="form-control" />

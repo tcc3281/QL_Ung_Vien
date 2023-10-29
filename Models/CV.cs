@@ -12,6 +12,21 @@ namespace QL_Ung_Vien.Models
         [Column(TypeName = "varchar(500)")]
         [Display(Name = "Link")]
         public string? path {  get; set; }
-        public IFormFile? cv;
+        public CV() { }
+        public static readonly List<string> CvExtensions = new List<string> { ".PDF" };
+
+        public static bool IsPDFFile(string filename)
+        {
+            // Kiểm tra xem tệp có tồn tại không
+            if (File.Exists(filename))
+            {
+                // Lấy phần mở rộng của tên tệp
+                string extension = Path.GetExtension(filename);
+                // So sánh nó với danh sách các phần mở rộng hợp lệ
+                return CvExtensions.Contains(extension.ToUpperInvariant());
+            }
+            // Nếu tệp không tồn tại, trả về false
+            return false;
+        }
     }
 }
