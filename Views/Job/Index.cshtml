@@ -55,7 +55,7 @@
             </td>
             <td id="@item.jobName@item.jobID">
                 <script>
-                        document.querySelector("#@item.jobName@item.jobID").innerHTML += `@Html.Raw(item.jD)`
+                        document.getElementById("@item.jobName@item.jobID").innerHTML += `@Html.Raw(item.jD)`
                 </script>
             </td>
             <td>

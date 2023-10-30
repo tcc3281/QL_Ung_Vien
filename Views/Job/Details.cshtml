@@ -29,11 +29,14 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.jobName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2" >
             @Html.DisplayNameFor(model => model.jD)
+            
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.jD)
+        <dd class="col-sm-10" id="@Model.jobName@Model.jobID">
+            <script>
+                document.getElementById("@Model.jobName@Model.jobID").innerHTML += `@Html.Raw(Model.jD)`
+            </script>
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.timeOpen)
