@@ -53,8 +53,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.jobName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.jD)
+            <td id="@item.jobName@item.jobID">
+                <script>
+                        document.getElementById("@item.jobName@item.jobID").innerHTML += `@Html.Raw(item.jD)`
+                </script>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.timeOpen)

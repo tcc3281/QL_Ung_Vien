@@ -59,6 +59,7 @@ namespace QL_Ung_Vien.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Job job)
         {
+            job.jobName = job.jobName.Trim();
             db.Jobs.Add(job);
             db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -88,7 +89,7 @@ namespace QL_Ung_Vien.Controllers
         public async Task<IActionResult> Edit(Job job)
         {
             var jb = db.Jobs.Find(job.jobID);
-            jb.jobName = job.jobName;
+            jb.jobName = job.jobName.Trim();
             jb.jD = job.jD;
             jb.timeOpen = job.timeOpen;
             jb.timeClose = job.timeClose;
