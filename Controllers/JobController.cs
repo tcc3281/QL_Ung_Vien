@@ -194,5 +194,31 @@ namespace QL_Ung_Vien.Controllers
 
             return View("CandidateApply", model);
         }
+
+        public IActionResult ShowCandidateApply()
+        {
+            var listJob = from a in db.Jobs
+                          join b in db.Applications on a.jobID equals b.jobID
+                          join c in db.Candidates on b.candidateID equals c.candidateID
+                          select new
+                          {
+                              candidateID = c.candidateID,
+                              jobID = a.jobID,
+                              jobName = a.jobName,
+                              des = a.jD,
+                              CandidateName = c.firstName + " " + c.lastName,
+                              JobStatement = b.aStatement
+                          };
+            dynamic model;
+            model = listJob.ToList();
+
+            return View("ShowCandidateApply", model);
+        }
+
+        public IActionResult ShowCandidate(int id)
+        {
+            var candidate = db.Candidates.Find(id);
+            return View(candidate);
+        }
     }
 }
