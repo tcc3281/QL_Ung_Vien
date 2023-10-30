@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing.Matching;
 using Microsoft.EntityFrameworkCore;
@@ -12,11 +13,12 @@ namespace QL_Ung_Vien.Controllers
     {
         private ApplicationDbContext db;
         private readonly IWebHostEnvironment _environment;
-
-        public HRController(ApplicationDbContext db, IWebHostEnvironment environment)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public HRController(ApplicationDbContext db, IWebHostEnvironment environment, UserManager<ApplicationUser> userManager)
         {
             this.db = db;
             _environment = environment;
+            _userManager = userManager;
         }
         public IActionResult Index(string name, int? page)
         {
@@ -33,19 +35,23 @@ namespace QL_Ung_Vien.Controllers
             return View(hrs.ToPagedList(pageNumber, pageSize));
         }
 
-        
-        public IActionResult Edit(int id)
+        [Authorize(Roles= "HR")]
+        public async Task<IActionResult> Edit(int id)
         {
             var hr = db.HRs.Find(id);
+            ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
+            if (hr.Id != applicationUser.Id)
+            {
+                return RedirectToAction("Index");
+            }
             return View(hr);
         }
-
+        [Authorize(Roles ="HR")]
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken] // Thêm tham số này để ngăn chặn tấn công giả mạo yêu cầu
         public async Task<IActionResult> Edit(HR h)
         {
             var hr = db.HRs.Find(h.hRID);
-
             // Thêm điều kiện này để kiểm tra ứng viên có tồn tại hay không
             if (hr == null)
             {
@@ -63,7 +69,7 @@ namespace QL_Ung_Vien.Controllers
         }
 
         [Authorize(Roles="Admin, HR, Candidate")]
-        public IActionResult Detail(int id)
+        public async Task<IActionResult> Detail(int id)
         {
             if (id == null || db.Candidates == null)
             {
@@ -78,8 +84,6 @@ namespace QL_Ung_Vien.Controllers
             }
             Image temp = db.Images.Where(m => m.imageID == hr.ImageID).FirstOrDefault();
             ViewBag.url = CandidateController.ConvertPath(temp.path);
-            Console.Write("");
-            Console.Write(ViewBag.url);
             return View(db.HRs.Find(id));
         }
 

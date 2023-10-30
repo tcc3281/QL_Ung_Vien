@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using QL_Ung_Vien.Areas.Identity.Data;
 using QL_Ung_Vien.Models;
@@ -33,9 +34,14 @@ namespace QL_Ung_Vien.Controllers
 
             return View(candidates.ToPagedList(pageNumber, pageSize));
         }
+        public async Task<IActionResult> Edit(int? id)
+        {
+            return View(db.Candidates.Find(id));
+        }
         // Action để chỉnh sửa thông tin của ứng viên
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken] // Thêm tham số này để ngăn chặn tấn công giả mạo yêu cầu
+        
         public async Task<IActionResult> Edit(Candidate c)
         {
             var candidate = db.Candidates.Find(c.candidateID);
