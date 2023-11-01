@@ -59,7 +59,6 @@ namespace QL_Ung_Vien.Controllers
         }
 
 
-
         public async Task<IActionResult> Detail(int id)
         {
             if (id == null || db.Candidates == null)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using QL_Ung_Vien.Areas.Identity.Data;
 using QL_Ung_Vien.Models;
@@ -7,6 +8,7 @@ using System.Xml.Linq;
 
 namespace QL_Ung_Vien.Controllers
 {
+
     public class DefaultController : Controller
     {
         ApplicationDbContext db;

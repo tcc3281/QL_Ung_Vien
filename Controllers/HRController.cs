@@ -8,6 +8,7 @@ using X.PagedList;
 
 namespace QL_Ung_Vien.Controllers
 {
+    [Authorize(Roles = "HR, Admin")]
     public class HRController : Controller
     {
         private ApplicationDbContext db;
