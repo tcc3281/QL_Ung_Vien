@@ -18,16 +18,10 @@ namespace QL_Ung_Vien.Models
 
         public static bool IsImageFile(string filename)
         {
-            // Kiểm tra xem tệp có tồn tại không
-            if (File.Exists(filename))
-            {
-                // Lấy phần mở rộng của tên tệp
-                string extension = Path.GetExtension(filename);
-                // So sánh nó với danh sách các phần mở rộng hợp lệ
-                return ImageExtensions.Contains(extension.ToUpperInvariant());
-            }
-            // Nếu tệp không tồn tại, trả về false
-            return false;
+            // Lấy phần mở rộng của tên tệp
+            string extension = Path.GetExtension(filename);
+            // So sánh nó với danh sách các phần mở rộng hợp lệ
+            return ImageExtensions.Contains(extension.ToUpperInvariant());
         }
     }
     

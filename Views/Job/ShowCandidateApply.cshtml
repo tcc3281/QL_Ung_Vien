@@ -32,8 +32,10 @@
                 <td>
                     @item.jobName
                 </td>
-                <td>
-                    @item.des
+                <td id="@item.jobName@item.jobID">
+                    <script>
+                        document.getElementById("@item.jobName@item.jobID").innerHTML += `@Html.Raw(item.des)`
+                    </script>
                 </td>
                 <td>
                     @item.CandidateName

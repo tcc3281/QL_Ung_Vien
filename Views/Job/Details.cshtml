@@ -10,70 +10,62 @@
 <div>
     <h4>Job</h4>
     <hr />
-    <dl class="row">
-        @* <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.benifitID)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.benifitID)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Requirement)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Requirement.requirementID)
-        </dd> *@
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.jobName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.jobName)
-        </dd>
-        <dt class="col-sm-2" >
-            @Html.DisplayNameFor(model => model.jD)
-            
-        </dt>
-        <dd class="col-sm-10" id="@Model.jobName@Model.jobID">
-            <script>
-                document.getElementById("@Model.jobName@Model.jobID").innerHTML += `@Html.Raw(Model.jD)`
-            </script>
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.timeOpen)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.timeOpen)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.timeClose)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.timeClose)
-        </dd>
-        @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Image.imageID)
-        </dd>*@
-    </dl>
-</div>
-<div>
-    @if (!User.IsInRole("Candidate"))
-    {
-        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model?.jobID">Edit</a> <br />
-        <a asp-action="CandidateApply" class="btn btn-primary" asp-route-id="@Model?.jobID">Application</a> <br />
-    }
-    else
-    {
-        if(ViewBag.aStatement == null)
-        {
-            <a asp-action="CandidateApply" class="btn btn-success" asp-route-id="@Model?.jobID">Apply</a> <br />
-        }
-        else
-        {
-            <a asp-action="CandidateApply" class="btn btn-success" asp-route-id="@Model?.jobID">UnApply</a> <br />
-        }
-    }
-    <a asp-action="Index" class="btn btn-dark">Back to List</a>
+    <div class="row">
+        <div class="col-sm-8">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.jobName)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.jobName)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.jD)
+                </dt>
+                <dd class="col-sm-8" id="@Model.jobName@Model.jobID">
+                    <script>
+                        document.getElementById("@Model.jobName@Model.jobID").innerHTML += `@Html.Raw(Model.jD)`
+                    </script>
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.timeOpen)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.timeOpen)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.timeClose)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.timeClose)
+                </dd>
+            </dl>
+            <div>
+                @if (!User.IsInRole("Candidate"))
+                {
+                    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model?.jobID">Edit</a> <br />
+                    <a asp-action="CandidateApply" class="btn btn-primary" asp-route-id="@Model?.jobID">Application</a> <br />
+                }
+                else
+                {
+                    if (ViewBag.aStatement == null)
+                    {
+                        <a asp-action="CandidateApply" class="btn btn-success" asp-route-id="@Model?.jobID">Apply</a> <br />
+                    }
+                    else
+                    {
+                        <a asp-action="CandidateApply" class="btn btn-success" asp-route-id="@Model?.jobID">UnApply</a> <br />
+                    }
+                }
+                <a asp-action="Index" class="btn btn-dark">Back to List</a>
+            </div>
+
+        </div>
+        <div class="col-sm-4">
+                @if (ViewBag.url != null)
+                {
+                    <img src="@ViewBag.url" class="img-fluid" />
+                }
+        </div>
+    </div>
 </div>

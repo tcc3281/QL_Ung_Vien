@@ -29,11 +29,13 @@ namespace QL_Ung_Vien.Models
         [Display(Name = "Hạn ứng tuyển")]
         public DateTime? timeClose { get; set; }//thời gian đóng ứng tuyển
         [Column(TypeName = "int")]
+        [Display(Name = "Ảnh")]
         public int? ImageID { get; set; }
         public Image? Image { get; set; }
 
         public virtual ICollection<Application> Applications { get; set; }
         public virtual ICollection<Interview> Interviews { get; set; }
+        [Display(Name = "Ảnh")]
         [NotMapped]
         public IFormFile? image { get; set; }
 
