@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using QL_Ung_Vien.Areas.Identity.Data;
 using QL_Ung_Vien.Models;
@@ -33,9 +34,14 @@ namespace QL_Ung_Vien.Controllers
 
             return View(candidates.ToPagedList(pageNumber, pageSize));
         }
+        public async Task<IActionResult> Edit(int? id)
+        {
+            return View(db.Candidates.Find(id));
+        }
         // Action để chỉnh sửa thông tin của ứng viên
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken] // Thêm tham số này để ngăn chặn tấn công giả mạo yêu cầu
+        
         public async Task<IActionResult> Edit(Candidate c)
         {
             var candidate = db.Candidates.Find(c.candidateID);
@@ -111,7 +117,7 @@ namespace QL_Ung_Vien.Controllers
         {
             if (c.cv!=null)
             {
-                if (true)
+                if (CV.IsPDFFile(c.cv.FileName))
                 {
                     // Sử dụng _environment.WebRootPath để lấy đường dẫn vật lý của thư mục gốc
                     string folder = "..\\wwwroot\\CVs\\";
@@ -150,22 +156,14 @@ namespace QL_Ung_Vien.Controllers
         [HttpGet]
         public async Task<FileResult> DownloadCV(int id)
         {
-            Console.WriteLine("");
-            Console.WriteLine(id);
             var temp = await db.Candidates.FirstOrDefaultAsync(m => m.candidateID == id);
-           
             var cv = await db.CVs.FirstOrDefaultAsync(k => k.cVID == temp.CVID);
-
             if (cv == null)
             {
                 return null;
             }
-
             string fileName = temp.firstName + temp.lastName + temp.candidateID.ToString() + ".pdf";
-            Console.WriteLine("");
-            Console.WriteLine(cv.path);
             byte[] fileBytes = await System.IO.File.ReadAllBytesAsync(cv.path.Remove(0,1));
-
             return File(fileBytes, "application/pdf", fileName);
         }
 

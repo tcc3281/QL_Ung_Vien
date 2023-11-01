@@ -27,9 +27,11 @@ namespace QL_Ung_Vien.Models
         public int? cStatement { get; set; }//trang thai  được nhận chưa đang xet tuyển hay gì
 
         [Column(TypeName = "int")]
+        [Display(Name = "Ảnh")]
         public int? ImageID { get; set; }
         public Image? Image { get; set; }
         [Column(TypeName = "int")]
+        [Display(Name = "Ảnh")]
         public int? CVID { get; set; }
         public CV? CV { get; set; }
         [NotMapped]

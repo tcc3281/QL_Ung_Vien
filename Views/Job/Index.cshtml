@@ -36,9 +36,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.timeClose)
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.Image)
-            </th>*@
+            <th>
+                
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -64,10 +64,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.timeClose)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Image.imageID)
-            </td>*@
-            @if (!User.IsInRole("Candidate"))
+                @if (User.IsInRole("Admin") || User.IsInRole("HR"))
             {
                 <td>
                     <a asp-action="Details" asp-route-id="@item.jobID" class="btn btn-info">Details</a> |
@@ -78,7 +75,7 @@
             else
             {
                 <td>
-                        <a asp-action="Details" asp-route-id="@item.jobID" class="btn btn-info">Details</a>
+                     <a asp-action="Details" asp-route-id="@item.jobID" class="btn btn-info">Details</a>
                 </td>
             }
         </tr>

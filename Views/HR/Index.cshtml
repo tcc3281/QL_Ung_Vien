@@ -14,7 +14,7 @@
 </p> *@
 
 <form asp-action="Index" method="get" class="form-check-inline">
-    <input type="search" name="name" placeholder="Find name" /> <button class="btn btn-group">Find</button>
+    <input type="search" name="name" placeholder="Find name" /> <button class="btn btn-primary">Find</button>
 </form>
 
 <table class="table">
@@ -88,30 +88,4 @@
         }
 
     </ul>
-    <style>
-        .pagination .pagination-list {
-            justify-content: left;
-            flex-direction: row;
-            margin: 0 auto;
-            display: flex;
-        }
-
-        .page-item {
-            text-decoration: none;
-            list-style-type: none;
-        }
-
-        .pagination .page-link {
-            font-size: 1.2em;
-            color: #333;
-            text-decoration: none;
-            list-style-type: none;
-        }
-
-            .pagination .page-link.active {
-                background-color: #000;
-                color: #fff;
-                border-color: #000;
-            }
-    </style>
 </div>

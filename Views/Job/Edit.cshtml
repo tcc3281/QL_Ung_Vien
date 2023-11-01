@@ -5,25 +5,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
-
-<h4>Job</h4>
+<h1>Chỉnh sửa thông tin công việc</h1>
 <hr />
 <div class="row">
     <div class="col-md-9">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="jobID" />
-            @* <div class="form-group">
-                <label asp-for="benifitID" class="control-label"></label>
-                <input asp-for="benifitID" class="form-control" />
-                <span asp-validation-for="benifitID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="requirementID" class="control-label"></label>
-                <select asp-for="requirementID" class="form-control" asp-items="ViewBag.requirementID"></select>
-                <span asp-validation-for="requirementID" class="text-danger"></span>
-            </div> *@
             <div class="form-group">
                 <label asp-for="jobName" class="control-label"></label>
                 <input asp-for="jobName" class="form-control" />
@@ -44,11 +32,11 @@
                 <input asp-for="timeClose" class="form-control" />
                 <span asp-validation-for="timeClose" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <label asp-for="ImageID" class="control-label"></label>
-                <select asp-for="ImageID" class="form-control" asp-items="ViewBag.ImageID"></select>
-                <span asp-validation-for="ImageID" class="text-danger"></span>
-            </div>*@
+            <div class="form-group">
+                <label asp-for="image" class="control-label"></label>
+                <input asp-for="image" class="form-control"></input>
+                <span asp-validation-for="image" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -57,7 +45,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Trở về</a>
 </div>
 
 @section Scripts {

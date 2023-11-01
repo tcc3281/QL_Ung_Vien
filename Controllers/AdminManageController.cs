@@ -26,7 +26,7 @@ namespace QL_Ung_Vien.Controllers
         }
         public IActionResult ListUser(int? page,string ? filter,string? view)
         {
-            int pageSize = 2;
+            int pageSize = 10;
             int pagenumber = (page ?? 1);
             if (Context.Users == null)
             {

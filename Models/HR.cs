@@ -25,6 +25,7 @@ namespace QL_Ung_Vien.Models
         [Display(Name = "Phone")]
         public string? phoneNumber { get; set; }
         [Column(TypeName = "int")]
+        [Display(Name = "Ảnh")]
         public int? ImageID { get; set; }
         public Image? Image { get; set; }
         public virtual ICollection<InterviewProcess> InterviewProcesses { get; set; }

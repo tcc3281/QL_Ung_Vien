@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace QL_Ung_Vien.Controllers
 {
-
+    [Authorize(Roles ="HR,Candidate")]
     public class DefaultController : Controller
     {
         ApplicationDbContext db;
@@ -27,8 +27,13 @@ namespace QL_Ung_Vien.Controllers
             var userDetails = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
+            if (db.Roles.FirstOrDefault(m => m.Name != "Admin").Id == applicationUser.Id)
+            {
+                return View("Index","Home");
+            }
             string idUser = applicationUser?.Id;
             // Hiển thị thông tin người dùng
+
 
             var user1 = db.Candidates.Where(c => c.Id == idUser).FirstOrDefault();
             var user2 = db.HRs.Where(h => h.Id == idUser).FirstOrDefault();

@@ -12,7 +12,7 @@
     <h4>Candidate</h4>
     <hr />
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-9">
             <dl class="row">
                 <dt class="col-sm-4">
                     @Html.DisplayNameFor(model => model.firstName)
@@ -47,9 +47,9 @@
                 <div>
                     <div>
                         <a href="@Url.Action("DownloadCV", new { id = Model.candidateID })" class="btn btn-outline-info text-infor"> DownLoad CV </a>
-                    </div>
-                    <div>
-                        <a asp-action="Edit" asp-route-id="@Model?.candidateID" class="btn btn-primary">Edit</a> |
+                        <br />
+                        <a asp-action="Edit" asp-route-id="@Model?.candidateID" class="btn btn-primary">Edit</a>
+                        <br />
                         <a asp-action="Index" class="btn btn-dark">Back to List</a>
                     </div>
                 </div>
@@ -57,10 +57,10 @@
             </dl>
         </div>
         
-        <div class="col-sm-6">
+        <div class="col-sm-3">
             @if (ViewBag.url != null)
             {
-                <img src="@ViewBag.url" class="img-fluid" />
+                <img src="@ViewBag.url" class="img-fluid"/>
             }
         </div>
     </div>
