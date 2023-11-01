@@ -118,8 +118,6 @@ namespace QL_Ung_Vien.Controllers
         {
             if (c.cv!=null)
             {
-                Console.WriteLine(c.cv.FileName);
-                Console.WriteLine(c.cv.FileName);
                 if (CV.IsPDFFile(c.cv.FileName))
                 {
                     // Sử dụng _environment.WebRootPath để lấy đường dẫn vật lý của thư mục gốc
@@ -159,18 +157,13 @@ namespace QL_Ung_Vien.Controllers
         [HttpGet]
         public async Task<FileResult> DownloadCV(int id)
         {
-            Console.WriteLine("");
-            Console.WriteLine(id);
             var temp = await db.Candidates.FirstOrDefaultAsync(m => m.candidateID == id);
             var cv = await db.CVs.FirstOrDefaultAsync(k => k.cVID == temp.CVID);
             if (cv == null)
             {
                 return null;
             }
-
             string fileName = temp.firstName + temp.lastName + temp.candidateID.ToString() + ".pdf";
-            Console.WriteLine("");
-            Console.WriteLine(cv.path);
             byte[] fileBytes = await System.IO.File.ReadAllBytesAsync(cv.path.Remove(0,1));
             return File(fileBytes, "application/pdf", fileName);
         }
