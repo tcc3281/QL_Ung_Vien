@@ -47,8 +47,18 @@ namespace QL_Ung_Vien.Controllers
             {
                 return NotFound();
             }
-
-            ViewBag.url = db.Images.Find(job.ImageID).path;
+            if(job.ImageID != null)
+            {
+                ViewBag.url = db.Images.Find(job.ImageID).path;
+            }
+            var userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var atem = db.Applications.FirstOrDefault(a => a.jobID == id &&
+                a.Candidate.Id == userID);
+            if (atem != null)
+            {
+                ViewBag.aStatement = atem.aStatement;
+            } 
+            
             return View(job);
         }
 
@@ -136,13 +146,11 @@ namespace QL_Ung_Vien.Controllers
                     jobID = id,
                     Job = db.Jobs.Find(id),
                     applyDate = DateTime.Now,
-                    aStatement = 0
+                    aStatement = 1
                 };
                 db.Applications.Add(application);
 
                 db.SaveChanges();
-
-                ViewBag.aStatement = application.aStatement;
             }
 
             var listJob = from a in db.Jobs
@@ -160,7 +168,7 @@ namespace QL_Ung_Vien.Controllers
 
             return RedirectToAction("ShowApply");
         }
-        [Authorize(Roles = "CAndidate")]
+        [Authorize(Roles = "Candidate")]
 
         public IActionResult UnApply(int id)
         {
